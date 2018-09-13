@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "user")
+@Table(name = "customer")
 public class User {
 	
 	@Id
@@ -21,11 +21,6 @@ public class User {
 	private String email;
 	
 	public User() {}
-
-	public User(String nickname, String email) {
-		this.nickname = nickname;
-		this.email = email;
-	}
 
 	public String getNickname() {
 		return nickname;
