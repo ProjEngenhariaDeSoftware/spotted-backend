@@ -1,4 +1,4 @@
-package com.spotted.models;
+package com.spotted.enums;
 
 public enum PostTypes {
 	NOTICE("NOTICE"), NEWS("NEWS"), ENTERTAINMENT("ENTERTAINMENT"), EVENT_ACADEMIC("EVENT_ACADEMIC");
