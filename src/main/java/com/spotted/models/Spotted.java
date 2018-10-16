@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 @Table(name = "spotted")
 public class Spotted {
 
-    
+
     private Long id;
     private String location;
     private String course;
