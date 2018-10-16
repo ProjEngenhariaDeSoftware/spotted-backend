@@ -28,6 +28,9 @@ public class Spotted {
     @Column(name = "image")
     private byte[] image;
 
+    @Column(name = "visible")
+    private boolean visible;
+
     public Spotted() {
     }
 
@@ -69,5 +72,13 @@ public class Spotted {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }
