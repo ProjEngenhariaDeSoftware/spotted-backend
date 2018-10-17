@@ -22,10 +22,10 @@ public class Post {
     @GeneratedValue
     private Long id;
 	
-	@Column(name = "username")
-	@NotNull(message = "Username can not be null")
-	@NotEmpty(message = "Username can not be empty")
-	private String username;
+	@Column(name = "nickname")
+	@NotNull(message = "nickname can not be null")
+	@NotEmpty(message = "nickname can not be empty")
+	private String nickname;
 	
 	@Column(name = "type")
 	@NotNull(message = "Type can not be null")
@@ -45,9 +45,9 @@ public class Post {
 	
 	public Post() {}
 	
-	public Post(Long id, String username, PostTypes type, String text, Image image, Date datetime) {
+	public Post(Long id, String nickname, PostTypes type, String text, Image image, Date datetime) {
 		this.id = id;
-		this.username = username;
+		this.nickname = nickname;
 		this.type = type;
 		this.text = text;
 		this.image = image;
@@ -62,12 +62,12 @@ public class Post {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getnickname() {
+		return nickname;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setnickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public PostTypes getType() {
