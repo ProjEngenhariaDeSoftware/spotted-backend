@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 public class SpottedController {
 
     @Autowired
-    SpottedService spottedService;
+    SpottedService spottedService; 
 
-    @RequestMapping(value = "/spotted", method = RequestMethod.GET)
+    @RequestMapping(value = "/spotted", method = RequestMethod.POST)
     public Spotted save(@RequestBody Spotted spotted) {
         return this.spottedService.save(spotted);
     }
