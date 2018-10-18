@@ -9,76 +9,85 @@ import javax.validation.constraints.NotNull;
 @Table(name = "spotted")
 public class Spotted {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue
-    private Long id;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @Column(name = "location")
-    private String location;
+	@Column(name = "location")
+	private String location;
 
-    @Column(name = "course")
-    private String course;
+	@Column(name = "course")
+	private String course;
 
-    @Column(name = "text")
-    @NotNull(message = "Spotted text can not be null")
-    @NotEmpty(message = "Spotted text can not be empty")
-    private String text;
+	@Column(name = "text")
+	@NotNull(message = "Spotted text can not be null")
+	@NotEmpty(message = "Spotted text can not be empty")
+	private String text;
 
-    @Column(name = "image")
-    private byte[] image;
+	@Lob
+	@Column(name = "image")
+	private byte[] image;
 
-    @Column(name = "visible")
-    private boolean visible;
+	@Column(name = "visible")
+	private boolean visible;
 
-    public Spotted() {
-    }
+	public Spotted() {
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Spotted(String location, String course, String text, byte[] image, boolean visible) {
+		this.location = location;
+		this.course = course;
+		this.text = text;
+		this.image = image;
+		this.visible = visible;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getLocation() {
-        return location;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+	public String getLocation() {
+		return location;
+	}
 
-    public String getCourse() {
-        return course;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-    public void setCourse(String course) {
-        this.course = course;
-    }
+	public String getCourse() {
+		return course;
+	}
 
-    public String getText() {
-        return text;
-    }
+	public void setCourse(String course) {
+		this.course = course;
+	}
 
-    public void setText(String text) {
-        this.text = text;
-    }
+	public String getText() {
+		return text;
+	}
 
-    public byte[] getImage() {
-        return image;
-    }
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
+	public byte[] getImage() {
+		return image;
+	}
 
-    public boolean isVisible() {
-        return visible;
-    }
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
 }
