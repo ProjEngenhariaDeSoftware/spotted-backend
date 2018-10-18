@@ -25,6 +25,7 @@ public class Spotted {
 	@NotEmpty(message = "Spotted text can not be empty")
 	private String text;
 
+	@Lob
 	@Column(name = "image")
 	private byte[] image;
 

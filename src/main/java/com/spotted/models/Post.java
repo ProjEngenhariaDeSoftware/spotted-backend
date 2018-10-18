@@ -1,17 +1,17 @@
 package com.spotted.models;
 
-import java.awt.Image;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.spotted.enums.*;
+import com.spotted.enums.PostTypes;
 
 @Entity
 @Table(name = "post")
@@ -35,8 +35,9 @@ public class Post {
 	@Column(name = "text")
 	private String text;
 	
+	@Lob
 	@Column(name = "image")
-	private Image image;
+	private byte[] image;
 	
 	@Column(name = "datetime")
 	@NotNull(message = "Datetime can not be null")
@@ -45,7 +46,7 @@ public class Post {
 	
 	public Post() {}
 	
-	public Post(Long id, String nickname, PostTypes type, String text, Image image, Date datetime) {
+	public Post(Long id, String nickname, PostTypes type, String text, byte[] image, Date datetime) {
 		this.id = id;
 		this.nickname = nickname;
 		this.type = type;
@@ -86,11 +87,11 @@ public class Post {
 		this.text = text;
 	}
 
-	public Image getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(Image image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
