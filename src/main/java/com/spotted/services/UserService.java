@@ -1,5 +1,7 @@
 package com.spotted.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class UserService {
 	
 	public User save(User user) {
 		return this.userRepository.save(user);
+	}
+	
+	public List<User> getAll() {
+		return this.userRepository.findAll();
 	}
 
 }
