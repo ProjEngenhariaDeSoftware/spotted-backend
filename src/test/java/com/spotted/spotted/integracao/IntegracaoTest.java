@@ -19,4 +19,9 @@ public class IntegracaoTest {
     public void test2() {
         Assert.assertTrue(false);
     }
+
+    @Test
+    public void test3() {
+        Assert.assertFalse(true);
+    }
 }
