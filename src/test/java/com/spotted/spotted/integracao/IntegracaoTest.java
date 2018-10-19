@@ -17,6 +17,6 @@ public class IntegracaoTest {
 
     @Test
     public void test2() {
-        Assert.assertTrue(true);
+        Assert.assertTrue(false);
     }
 }
