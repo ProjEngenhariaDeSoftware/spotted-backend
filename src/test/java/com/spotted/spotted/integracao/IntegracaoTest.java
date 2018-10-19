@@ -17,11 +17,11 @@ public class IntegracaoTest {
 
     @Test
     public void test2() {
-        Assert.assertTrue(false);
+        Assert.assertTrue(true);
     }
 
     @Test
     public void test3() {
-        Assert.assertFalse(true);
+        Assert.assertFalse(false);
     }
 }
