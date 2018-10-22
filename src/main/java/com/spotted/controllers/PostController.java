@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +40,11 @@ public class PostController {
 	@RequestMapping(value = "/post", method = RequestMethod.GET)
 	public List<Post> getAll() {
 		return this.postService.getAll();
+	}
+	
+	@RequestMapping(value = "/post/{nickname}", method = RequestMethod.GET)
+	public List<Post> searchByNickname(@PathVariable String nickname) {
+		return this.postService.searchByNickname(nickname);
 	}
 
 }
