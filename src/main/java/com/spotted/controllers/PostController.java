@@ -20,10 +20,21 @@ public class PostController {
 	@Autowired
 	PostService postService;
 	
-	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public Post save(@RequestBody Post post) {
-		return this.postService.save(post);	
-	}
+	private boolean notText(String text) {
+	    return text == null || text.isEmpty();
+	  }
+	  
+	  private boolean notImage(byte[] image) {
+	    return image == null || image.length == 0;
+	  }
+	  
+	  @RequestMapping(value = "/post", method = RequestMethod.POST)
+	  public Post save(@RequestBody Post post) throws Exception {
+	    if (this.notText(post.getText()) && this.notImage(post.getImage())) {
+	      throw new Exception("Text and image can not be empty or null simultaneously'");
+	    }
+	    return this.postService.save(post);  
+	  }
 	
 	@RequestMapping(value = "/post", method = RequestMethod.GET)
 	public List<Post> getAll() {
