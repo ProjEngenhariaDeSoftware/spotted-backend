@@ -1,5 +1,6 @@
 package com.spotted.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,16 @@ public class UserService {
 	
 	public List<User> getAll() {
 		return this.userRepository.findAll();
+	}
+
+	public List<User> searchUser(String nickname) {
+		List<User> users = new ArrayList<User>();
+		for (User user: this.getAll()) {
+			if (user.getNickname().startsWith(nickname)) {
+				users.add(user);
+			}
+		}
+		return users;
 	}
 
 }
