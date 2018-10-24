@@ -42,9 +42,18 @@ public class PostController {
 		return this.postService.getAll();
 	}
 	
-	@RequestMapping(value = "/post/{nickname}", method = RequestMethod.GET)
+	@RequestMapping(value = "/post/user/{nickname}", method = RequestMethod.GET)
 	public List<Post> searchByNickname(@PathVariable String nickname) {
 		return this.postService.searchByNickname(nickname);
 	}
 	
+	@RequestMapping(value = "/post/id/{id}", method = RequestMethod.GET)
+	public Post searchById(@PathVariable Long id) {
+		return this.postService.searchById(id);
+	}
+	
+	@RequestMapping(value = "/post/id/{id}", method = RequestMethod.DELETE)
+	public Post deleteById(@PathVariable Long id) {
+		return this.postService.deleteById(id);
+	}
 }
