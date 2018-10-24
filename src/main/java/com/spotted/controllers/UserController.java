@@ -31,9 +31,14 @@ public class UserController {
 		return this.userService.getAll();
 	}
 	
-	@RequestMapping(value = "/user/{nickname}", method = RequestMethod.GET)
-	public List<User> searchUser(@PathVariable String nickname) {
-		return this.userService.searchUser(nickname);
+	@RequestMapping(value = "/user/nickname/{nickname}", method = RequestMethod.GET)
+	public List<User> findUserByNickname(@PathVariable String nickname) {
+		return this.userService.findUserByNickname(nickname);
+	}
+	
+	@RequestMapping(value = "/user/email/{email}", method = RequestMethod.GET)
+	public User findUserByEmail(@PathVariable String email) {
+		return this.userService.findUserByEmail(email);
 	}
 
 }
