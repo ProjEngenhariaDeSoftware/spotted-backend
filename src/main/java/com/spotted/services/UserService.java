@@ -30,4 +30,13 @@ public class UserService {
 		return this.userRepository.findUserByEmail(email);
 	}
 
+	public User change(User user, String newNickname) throws Exception {
+		if (!this.userRepository.existsById(user.getEmail())) {
+			throw new Exception("Email not found!");
+		}
+		user.setNickname(newNickname);
+		this.save(user);
+		return user;
+	}
+
 }

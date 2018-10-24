@@ -21,15 +21,21 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public List<User> getAll() {
+		return this.userService.getAll();
+	}
+	
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public User save(@RequestBody User user) {
 		return this.userService.save(user);
 	}
 	
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public List<User> getAll() {
-		return this.userService.getAll();
+	@RequestMapping(value = "/user/{newNickname}", method = RequestMethod.PUT)
+	public User change(@RequestBody User user, @PathVariable String newNickname) throws Exception {
+		return this.userService.change(user, newNickname);
 	}
+	
 	
 	@RequestMapping(value = "/user/nickname/{nickname}", method = RequestMethod.GET)
 	public List<User> findUserByNickname(@PathVariable String nickname) {
