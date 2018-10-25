@@ -52,12 +52,4 @@ public class Comment {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public Long getCommenter() {
-        return commenter;
-    }
-
-    public void setCommenter(Long commenter) {
-        this.commenter = commenter;
-    }
 }
