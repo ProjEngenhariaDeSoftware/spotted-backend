@@ -13,17 +13,21 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userMentioned")
+    @Column(name = "user_mentioned")
     private String userMentioned;
-
-    @Column(name = "commenter")
-    @NotNull(message = "Commenter can not be null")
-    private Long commenter;
 
     @Column(name = "comment")
     @NotNull(message = "Comment can not be null")
     @NotEmpty(message = "Comment can not be empty")
     private String comment;
+
+    public Comment() {
+    }
+
+    public Comment(String userMentioned, String comment) {
+        this.userMentioned = userMentioned;
+        this.comment = comment;
+    }
 
     public String getUserMentioned() {
         return userMentioned;

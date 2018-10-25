@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(name = "spotted")
@@ -31,6 +32,10 @@ public class Spotted {
 
     @Column(name = "visible")
     private boolean visible;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "spotted_id", referencedColumnName = "id")
+    private Set<Comment> comments;
 
     public Spotted() {
     }
@@ -89,5 +94,13 @@ public class Spotted {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }
