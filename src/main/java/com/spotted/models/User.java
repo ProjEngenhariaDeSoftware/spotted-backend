@@ -12,19 +12,19 @@ import javax.validation.constraints.NotNull;
 public class User {
 	
 	@Id
-	@Column(name = "email")
-	private String email;
-	
-	@Column(name = "nickname", unique=true)
-	@NotNull(message = "User nickname can not be null")
-	@NotEmpty(message = "User nickname can not be empty")
+	@Column(name = "nickname")
 	private String nickname;
+	
+	@Column(name = "email", unique=true)
+	@NotNull(message = "User email can not be null")
+	@NotEmpty(message = "User email can not be empty")
+	private String email;
 	
 	public User() {}
 	
-	public User(String email, String nickname) {
-		this.email = email;
+	public User(String nickname, String email) {
 		this.nickname = nickname;
+		this.email = email;
 	}
 
 	public String getNickname() {
