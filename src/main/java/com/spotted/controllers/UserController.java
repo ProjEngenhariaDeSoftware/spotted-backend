@@ -31,15 +31,15 @@ public class UserController {
 		return this.userService.save(user);
 	}
 	
-	@RequestMapping(value = "/user/{newNickname}", method = RequestMethod.PUT)
-	public User change(@RequestBody User user, @PathVariable String newNickname) throws Exception {
-		return this.userService.change(user, newNickname);
+	@RequestMapping(value = "/user", method = RequestMethod.PUT)
+	public User update(@RequestBody User user) {
+		return this.userService.update(user);
 	}
 	
 	
-	@RequestMapping(value = "/user/nickname/{nickname}", method = RequestMethod.GET)
-	public List<User> findUserByNickname(@PathVariable String nickname) {
-		return this.userService.findUserByNickname(nickname);
+	@RequestMapping(value = "/user/username/{username}", method = RequestMethod.GET)
+	public List<User> findUserByUsername(@PathVariable String username) {
+		return this.userService.findUserByUsername(username);
 	}
 	
 	@RequestMapping(value = "/user/email/{email}", method = RequestMethod.GET)

@@ -22,21 +22,22 @@ public class UserService {
 		return this.userRepository.findAll();
 	}
 
-	public List<User> findUserByNickname(String nickname) {
-		return this.userRepository.findUserByNickname(nickname);
+	public List<User> findUserByUsername(String username) {
+		return this.userRepository.findUserByUsername(username);
 	}
 
 	public User findUserByEmail(String email) {
 		return this.userRepository.findUserByEmail(email);
 	}
 
-	public User change(User user, String newNickname) throws Exception {
+	public User update(User user) {
 		if (!this.userRepository.existsById(user.getEmail())) {
-			throw new Exception("Email not found!");
+			return null;
 		}
-		user.setNickname(newNickname);
-		this.save(user);
-		return user;
+		User find = this.findUserByEmail(user.getEmail());
+		find.setUsername(user.getUsername());
+		this.save(find);
+		return find;
 	}
 
 }
