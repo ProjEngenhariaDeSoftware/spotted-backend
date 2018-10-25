@@ -40,4 +40,20 @@ public class Comment {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCommenter() {
+        return commenter;
+    }
+
+    public void setCommenter(Long commenter) {
+        this.commenter = commenter;
+    }
 }
