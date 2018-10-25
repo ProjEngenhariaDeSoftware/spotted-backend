@@ -10,7 +10,7 @@ public class Comment {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "userMentioned")
@@ -18,8 +18,7 @@ public class Comment {
 
     @Column(name = "commenter")
     @NotNull(message = "Commenter can not be null")
-    @NotEmpty(message = "Commenter can not be empty")
-    private String commenter;
+    private Long commenter;
 
     @Column(name = "comment")
     @NotNull(message = "Comment can not be null")
@@ -32,14 +31,6 @@ public class Comment {
 
     public void setUserMentioned(String userMentioned) {
         this.userMentioned = userMentioned;
-    }
-
-    public String getCommenter() {
-        return commenter;
-    }
-
-    public void setCommenter(String commenter) {
-        this.commenter = commenter;
     }
 
     public String getComment() {
