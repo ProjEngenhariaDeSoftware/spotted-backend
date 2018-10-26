@@ -17,43 +17,43 @@ import com.spotted.services.PostService;
 @RequestMapping(value = "/api")
 @CrossOrigin(value = "*")
 public class PostController {
-	
-	@Autowired
-	PostService postService;
-	
-	private boolean notText(String text) {
-		return text == null || text.isEmpty();
-	}
-	
-	private boolean notImage(byte[] image) {
-		return image == null || image.length == 0;
-	}
-	
-	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public Post save(@RequestBody Post post) throws Exception {
-		if (this.notText(post.getText()) && this.notImage(post.getImage())) {
-			throw new Exception("Text and image can not be empty or null simultaneously'");
-		}
-		return this.postService.save(post);
-	}
-	
-	@RequestMapping(value = "/post", method = RequestMethod.GET)
-	public List<Post> getAll() {
-		return this.postService.getAll();
-	}
-	
-	@RequestMapping(value = "/post/user/{nickname}", method = RequestMethod.GET)
-	public List<Post> searchByNickname(@PathVariable String nickname) {
-		return this.postService.searchByNickname(nickname);
-	}
-	
-	@RequestMapping(value = "/post/id/{id}", method = RequestMethod.GET)
-	public Post searchById(@PathVariable Long id) {
-		return this.postService.searchById(id);
-	}
-	
-	@RequestMapping(value = "/post/id/{id}", method = RequestMethod.DELETE)
-	public Post deleteById(@PathVariable Long id) {
-		return this.postService.deleteById(id);
-	}
+
+    @Autowired
+    PostService postService;
+
+    private boolean notText(String text) {
+        return text == null || text.isEmpty();
+    }
+
+    private boolean notImage(byte[] image) {
+        return image == null || image.length == 0;
+    }
+
+    @RequestMapping(value = "/post", method = RequestMethod.POST)
+    public Post save(@RequestBody Post post) throws Exception {
+        if (this.notText(post.getText()) && this.notImage(post.getImage())) {
+            throw new Exception("Text and image can not be empty or null simultaneously'");
+        }
+        return this.postService.save(post);
+    }
+
+    @RequestMapping(value = "/post", method = RequestMethod.GET)
+    public List<Post> getAll() {
+        return this.postService.getAll();
+    }
+
+    @RequestMapping(value = "/post/user/{nickname}", method = RequestMethod.GET)
+    public List<Post> searchByNickname(@PathVariable String nickname) {
+        return this.postService.searchByNickname(nickname);
+    }
+
+    @RequestMapping(value = "/post/id/{id}", method = RequestMethod.GET)
+    public Post searchById(@PathVariable Long id) {
+        return this.postService.searchById(id);
+    }
+
+    @RequestMapping(value = "/post/id/{id}", method = RequestMethod.DELETE)
+    public Post deleteById(@PathVariable Long id) {
+        return this.postService.deleteById(id);
+    }
 }
