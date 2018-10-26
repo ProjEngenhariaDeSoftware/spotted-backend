@@ -15,24 +15,24 @@ public class User {
 	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "nickname", unique=true)
-	@NotNull(message = "User nickname can not be null")
-	@NotEmpty(message = "User nickname can not be empty")
-	private String nickname;
+	@Column(name = "username", unique=true)
+	@NotNull(message = "username can not be null")
+	@NotEmpty(message = "username can not be empty")
+	private String username;
 	
 	public User() {}
 	
-	public User(String email, String nickname) {
+	public User(String email, String username) {
 		this.email = email;
-		this.nickname = nickname;
+		this.username = username;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getEmail() {
