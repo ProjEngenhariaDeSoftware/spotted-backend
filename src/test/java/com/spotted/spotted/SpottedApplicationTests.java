@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@TestPropertySource(locations="classpath:tests.properties")
+@TestPropertySource(locations="classpath:application.properties")
 public class SpottedApplicationTests {
 
 	@Test
