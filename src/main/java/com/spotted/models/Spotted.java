@@ -1,5 +1,7 @@
 package com.spotted.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
@@ -8,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "spotted")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Spotted {
 	
 	@Id
