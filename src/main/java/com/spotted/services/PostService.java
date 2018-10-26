@@ -24,8 +24,8 @@ public class PostService {
 		return this.postRepository.findAll();
 	}
 
-	public List<Post> searchByNickname(String nickname) {
-		return this.postRepository.postsByNickname(nickname);
+	public List<Post> searchByEmail(String email) {
+		return this.postRepository.postsByEmail(email);
 	}
 	
 	public Post searchById(Long id) {
