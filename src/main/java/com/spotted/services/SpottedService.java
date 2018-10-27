@@ -6,6 +6,7 @@ import com.spotted.repositories.SpottedRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,10 @@ public class SpottedService {
 	
 	public List<Spotted> getAll() {
 		return this.spottedRepository.findAll();
+	}
+	
+	public Optional<Spotted> get(Long id) {
+		return this.spottedRepository.findById(id);
 	}
 	
 	public Spotted addComment(Long spottedId, Comment comment) {

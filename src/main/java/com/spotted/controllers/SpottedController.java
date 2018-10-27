@@ -1,6 +1,7 @@
 package com.spotted.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.spotted.models.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class SpottedController {
 	@RequestMapping(value = "/spotted", method = RequestMethod.GET)
 	public List<Spotted> getAll() {
 		return this.spottedService.getAll();
+	}
+	
+	@RequestMapping(value = "/spotted/{id}", method = RequestMethod.GET)
+	public Optional<Spotted> get(@PathVariable Long id) {
+		return this.spottedService.get(id);
 	}
 	
 	@RequestMapping(value = "/spotted/{spottedId}/comment", method = RequestMethod.PUT)
