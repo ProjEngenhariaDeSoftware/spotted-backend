@@ -1,16 +1,22 @@
 package com.spotted.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.spotted.enums.PostTypes;
 
 @Entity
@@ -19,7 +25,7 @@ public class Post {
 	
 	@Id
     @Column(name = "id")
-    @GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
 	@Column(name = "nickname")
@@ -29,7 +35,7 @@ public class Post {
 	
 	@Column(name = "type")
 	@NotNull(message = "Type can not be null")
-	@NotEmpty(message = "Type can not be empty")
+	@Enumerated(EnumType.STRING)
 	private PostTypes type;
 	
 	@Column(name = "text")
@@ -40,19 +46,16 @@ public class Post {
 	private byte[] image;
 	
 	@Column(name = "datetime")
-	@NotNull(message = "Datetime can not be null")
-	@NotEmpty(message = "Datetime can not be empty")
-	private Date datetime;
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+	private LocalDateTime datetime;
 	
 	public Post() {}
 	
-	public Post(Long id, String nickname, PostTypes type, String text, byte[] image, Date datetime) {
-		this.id = id;
+	public Post(String nickname, String text, byte[] image) {
 		this.nickname = nickname;
-		this.type = type;
 		this.text = text;
 		this.image = image;
-		this.datetime = datetime;
 	}
 
 	public Long getId() {
@@ -63,11 +66,11 @@ public class Post {
 		this.id = id;
 	}
 
-	public String getnickname() {
+	public String getNickname() {
 		return nickname;
 	}
 
-	public void setnickname(String nickname) {
+	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
@@ -95,11 +98,11 @@ public class Post {
 		this.image = image;
 	}
 
-	public Date getDatetime() {
+	public LocalDateTime getDatetime() {
 		return datetime;
 	}
 
-	public void setDatetime(Date datetime) {
+	public void setDatetime(LocalDateTime datetime) {
 		this.datetime = datetime;
 	}
 }

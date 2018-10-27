@@ -22,4 +22,22 @@ public class UserService {
 		return this.userRepository.findAll();
 	}
 
+	public List<User> findUserByUsername(String username) {
+		return this.userRepository.findUserByUsername(username);
+	}
+
+	public User findUserByEmail(String email) {
+		return this.userRepository.findUserByEmail(email);
+	}
+
+	public User update(User user) {
+		if (!this.userRepository.existsById(user.getEmail())) {
+			return null;
+		}
+		User find = this.findUserByEmail(user.getEmail());
+		find.setUsername(user.getUsername());
+		this.save(find);
+		return find;
+	}
+
 }
