@@ -1,6 +1,7 @@
 package com.spotted.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -41,6 +42,7 @@ public class Spotted {
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "spotted_id", referencedColumnName = "id")
+	@JsonIgnore
 	private Set<Comment> comments;
 	
 	@Column(name = "datetime")
