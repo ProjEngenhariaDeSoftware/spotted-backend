@@ -6,6 +6,7 @@ import com.spotted.repositories.SpottedRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,11 +29,15 @@ public class SpottedService {
 		return this.spottedRepository.findAll();
 	}
 	
-	public Spotted addComment(Long spottedId, Comment comment) {
+	public Optional<Spotted> get(Long id) {
+		return this.spottedRepository.findById(id);
+	}
+	
+	public Spotted addComment(Long id, Comment comment) {
 		this.commentService.save(comment);
 		Spotted spotted = null;
-		if (this.spottedRepository.existsById(spottedId)) {
-			spotted = this.spottedRepository.getOne(spottedId);
+		if (this.spottedRepository.existsById(id)) {
+			spotted = this.spottedRepository.getOne(id);
 			spotted.addComment(comment);
 			this.spottedRepository.save(spotted);
 		}
