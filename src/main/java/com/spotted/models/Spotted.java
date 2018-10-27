@@ -1,11 +1,15 @@
 package com.spotted.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -38,7 +42,13 @@ public class Spotted {
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "spotted_id", referencedColumnName = "id")
+	@JsonIgnore
 	private Set<Comment> comments;
+	
+	@Column(name = "datetime")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+	private LocalDateTime datetime;
 	
 	public Spotted() {
 	}
@@ -109,5 +119,13 @@ public class Spotted {
 	
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
+	}
+	
+	public LocalDateTime getDatetime() {
+		return datetime;
+	}
+	
+	public void setDatetime(LocalDateTime datetime) {
+		this.datetime = datetime;
 	}
 }
