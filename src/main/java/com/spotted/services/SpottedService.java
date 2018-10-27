@@ -4,6 +4,7 @@ import com.spotted.models.Comment;
 import com.spotted.models.Spotted;
 import com.spotted.repositories.SpottedRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class SpottedService {
 	CommentService commentService;
 	
 	public Spotted save(Spotted spotted) {
+		spotted.setDatetime(LocalDateTime.now());
 		return this.spottedRepository.save(spotted);
 	}
 	
