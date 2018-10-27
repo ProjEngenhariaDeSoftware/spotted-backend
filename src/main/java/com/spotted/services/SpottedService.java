@@ -33,11 +33,11 @@ public class SpottedService {
 		return this.spottedRepository.findById(id);
 	}
 	
-	public Spotted addComment(Long spottedId, Comment comment) {
+	public Spotted addComment(Long id, Comment comment) {
 		this.commentService.save(comment);
 		Spotted spotted = null;
-		if (this.spottedRepository.existsById(spottedId)) {
-			spotted = this.spottedRepository.getOne(spottedId);
+		if (this.spottedRepository.existsById(id)) {
+			spotted = this.spottedRepository.getOne(id);
 			spotted.addComment(comment);
 			this.spottedRepository.save(spotted);
 		}

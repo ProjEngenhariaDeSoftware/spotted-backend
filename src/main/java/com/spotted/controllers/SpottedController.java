@@ -38,8 +38,8 @@ public class SpottedController {
 		return this.spottedService.get(id);
 	}
 	
-	@RequestMapping(value = "/spotted/{spottedId}/comment", method = RequestMethod.PUT)
-	public Spotted addComment(@PathVariable Long spottedId, @RequestBody Comment comment) {
-		return this.spottedService.addComment(spottedId, comment);
+	@RequestMapping(value = "/spotted/{id}/comment", method = RequestMethod.PUT)
+	public Spotted addComment(@PathVariable Long id, @RequestBody Comment comment) {
+		return this.spottedService.addComment(id, comment);
 	}
 }
