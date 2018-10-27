@@ -22,19 +22,8 @@ public class SpottedController {
 	@Autowired
 	SpottedService spottedService;
 	
-	private boolean notText(String text) {
-		return text == null || text.isEmpty();
-	}
-	
-	private boolean notImage(byte[] image) {
-		return image == null || image.length == 0;
-	}
-	
 	@RequestMapping(value = "/spotted", method = RequestMethod.POST)
 	public Spotted save(@RequestBody Spotted spotted) throws Exception {
-		if (this.notText(spotted.getText()) && this.notImage(spotted.getImage())) {
-			throw new Exception("Text and image can not be empty or null simultaneously'");
-		}
 		return this.spottedService.save(spotted);
 	}
 	
