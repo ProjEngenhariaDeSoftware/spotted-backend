@@ -2,8 +2,8 @@ package com.spotted.controllers;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
-import com.spotted.models.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spotted.models.Comment;
 import com.spotted.models.Spotted;
 import com.spotted.services.SpottedService;
 
@@ -41,5 +42,10 @@ public class SpottedController {
 	@RequestMapping(value = "/spotted/{id}/comment", method = RequestMethod.PUT)
 	public Spotted addComment(@PathVariable Long id, @RequestBody Comment comment) {
 		return this.spottedService.addComment(id, comment);
+	}
+	
+	@RequestMapping(value = "/spotted/{id}/comment", method = RequestMethod.GET)
+	public Set<Comment> getComments(@PathVariable Long id){
+		return this.spottedService.getComments(id);
 	}
 }
