@@ -96,8 +96,7 @@ public class SpottedServiceTest extends SpottedApplicationTests {
 
         Comment comment = new Comment("", "Comentário de teste.");
         spottedService.addComment(spottedSaved.getId(), comment);
-        Set<Comment> comments = spottedService.getAll().stream().filter(spotted -> spotted.getId().equals(spottedSaved.getId()))
-                            .findFirst().get().getComments();
+        Set<Comment> comments = spottedService.getComments(this.spotted.getId());
 
         Assert.assertFalse("O spotted deveria ter comentários.", comments.isEmpty());
         Assert.assertTrue("O comentário deveria estar no conjunto de comentários do spotted",
@@ -119,8 +118,7 @@ public class SpottedServiceTest extends SpottedApplicationTests {
             spottedService.addComment(spottedSaved.getId(), comment);
             Assert.fail("O comentário não deveria ter sido salvo.");
         } catch (Exception e) {
-            Set<Comment> comments = spottedService.getAll().stream().filter(spotted -> spotted.getId().equals(spottedSaved.getId()))
-                    .findFirst().get().getComments();
+            Set<Comment> comments = spottedService.getComments(this.spotted.getId());
             Assert.assertFalse("O comentáario não deveria ter sido salvo.", comments.contains(comment));
         }
     }
@@ -140,8 +138,7 @@ public class SpottedServiceTest extends SpottedApplicationTests {
             spottedService.addComment(spottedSaved.getId(), comment);
             Assert.fail("O comentário não deveria ter sido salvo.");
         } catch (Exception e) {
-            Set<Comment> comments = spottedService.getAll().stream().filter(spotted -> spotted.getId().equals(spottedSaved.getId()))
-                    .findFirst().get().getComments();
+            Set<Comment> comments = spottedService.getComments(this.spotted.getId());
             Assert.assertFalse("O comentáario não deveria ter sido salvo.", comments.contains(comment));
         }
     }
@@ -161,8 +158,7 @@ public class SpottedServiceTest extends SpottedApplicationTests {
             spottedService.addComment(spottedSaved.getId(), comment);
             Assert.fail("O comentário não deveria ter sido salvo.");
         } catch (Exception e) {
-            Set<Comment> comments = spottedService.getAll().stream().filter(spotted -> spotted.getId().equals(spottedSaved.getId()))
-                    .findFirst().get().getComments();
+            Set<Comment> comments = spottedService.getComments(this.spotted.getId());
             Assert.assertFalse("O comentáario não deveria ter sido salvo.", comments.contains(comment));
         }
     }
