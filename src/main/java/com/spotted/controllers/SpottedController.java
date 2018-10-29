@@ -1,6 +1,7 @@
 package com.spotted.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.spotted.models.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +23,8 @@ public class SpottedController {
 	@Autowired
 	SpottedService spottedService;
 	
-	private boolean notText(String text) {
-		return text == null || text.isEmpty();
-	}
-	
-	private boolean notImage(byte[] image) {
-		return image == null || image.length == 0;
-	}
-	
 	@RequestMapping(value = "/spotted", method = RequestMethod.POST)
 	public Spotted save(@RequestBody Spotted spotted) throws Exception {
-		if (this.notText(spotted.getText()) && this.notImage(spotted.getImage())) {
-			throw new Exception("Text and image can not be empty or null simultaneously'");
-		}
 		return this.spottedService.save(spotted);
 	}
 	
@@ -43,8 +33,13 @@ public class SpottedController {
 		return this.spottedService.getAll();
 	}
 	
-	@RequestMapping(value = "/spotted/{spottedId}/comment", method = RequestMethod.PUT)
-	public Spotted addComment(@PathVariable Long spottedId, @RequestBody Comment comment) {
-		return this.spottedService.addComment(spottedId, comment);
+	@RequestMapping(value = "/spotted/{id}", method = RequestMethod.GET)
+	public Optional<Spotted> get(@PathVariable Long id) {
+		return this.spottedService.get(id);
+	}
+	
+	@RequestMapping(value = "/spotted/{id}/comment", method = RequestMethod.PUT)
+	public Spotted addComment(@PathVariable Long id, @RequestBody Comment comment) {
+		return this.spottedService.addComment(id, comment);
 	}
 }

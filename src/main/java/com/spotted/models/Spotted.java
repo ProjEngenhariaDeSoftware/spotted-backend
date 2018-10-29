@@ -1,6 +1,9 @@
 package com.spotted.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,11 +17,11 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -51,7 +54,13 @@ public class Spotted {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "spotted_id", referencedColumnName = "id")
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Set<Comment> comments;
+	
+	@Column(name = "datetime")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+	private LocalDateTime datetime;
 	
 	public Spotted() {
 	}
@@ -144,5 +153,13 @@ public class Spotted {
 		int result = Objects.hash(id, location, course, text, visible, comments);
 		result = 31 * result + Arrays.hashCode(image);
 		return result;
+	}
+
+	public LocalDateTime getDatetime() {
+		return datetime;
+	}
+	
+	public void setDatetime(LocalDateTime datetime) {
+		this.datetime = datetime;
 	}
 }
