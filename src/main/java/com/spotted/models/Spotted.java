@@ -52,7 +52,7 @@ public class Spotted {
 	@Column(name = "visible")
 	private boolean visible;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "spotted_id", referencedColumnName = "id")
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Set<Comment> comments;
