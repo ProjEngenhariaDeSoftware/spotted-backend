@@ -18,6 +18,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Objects;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -48,7 +51,7 @@ public class Spotted {
 	
 	@Column(name = "visible")
 	private boolean visible;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "spotted_id", referencedColumnName = "id")
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -68,6 +71,7 @@ public class Spotted {
 		this.text = text;
 		this.image = image;
 		this.visible = visible;
+		this.comments = new HashSet<>();
 	}
 	
 	public Long getId() {
@@ -117,19 +121,40 @@ public class Spotted {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-	
+
 	public Set<Comment> getComments() {
 		return comments;
 	}
-	
+
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
-	
+
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Spotted spotted = (Spotted) o;
+		return visible == spotted.visible &&
+				Objects.equals(id, spotted.id) &&
+				Objects.equals(location, spotted.location) &&
+				Objects.equals(course, spotted.course) &&
+				Objects.equals(text, spotted.text) &&
+				Arrays.equals(image, spotted.image) &&
+				Objects.equals(comments, spotted.comments);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = Objects.hash(id, location, course, text, visible, comments);
+		result = 31 * result + Arrays.hashCode(image);
+		return result;
+	}
+
 	public LocalDateTime getDatetime() {
 		return datetime;
 	}
