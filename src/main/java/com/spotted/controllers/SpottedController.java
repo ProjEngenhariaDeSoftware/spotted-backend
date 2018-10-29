@@ -20,32 +20,37 @@ import com.spotted.services.SpottedService;
 @RequestMapping(value = "/api")
 @CrossOrigin(value = "*")
 public class SpottedController {
-	
+
 	@Autowired
 	SpottedService spottedService;
-	
+
 	@RequestMapping(value = "/spotted", method = RequestMethod.POST)
 	public Spotted save(@RequestBody Spotted spotted) throws Exception {
 		return this.spottedService.save(spotted);
 	}
-	
+
 	@RequestMapping(value = "/spotted", method = RequestMethod.GET)
 	public List<Spotted> getAll() {
 		return this.spottedService.getAll();
 	}
-	
+
 	@RequestMapping(value = "/spotted/{id}", method = RequestMethod.GET)
 	public Optional<Spotted> get(@PathVariable Long id) {
 		return this.spottedService.get(id);
 	}
-	
+
 	@RequestMapping(value = "/spotted/{id}/comment", method = RequestMethod.PUT)
 	public Spotted addComment(@PathVariable Long id, @RequestBody Comment comment) {
 		return this.spottedService.addComment(id, comment);
 	}
-	
+
 	@RequestMapping(value = "/spotted/{id}/comment", method = RequestMethod.GET)
-	public Set<Comment> getComments(@PathVariable Long id){
+	public Set<Comment> getComments(@PathVariable Long id) {
 		return this.spottedService.getComments(id);
+	}
+
+	@RequestMapping(value = "/spotted/{id}", method = RequestMethod.PUT)
+	public Spotted update(@PathVariable Long id, @RequestBody Spotted spotted) {
+		return this.spottedService.update(id, spotted);
 	}
 }

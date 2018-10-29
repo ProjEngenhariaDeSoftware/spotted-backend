@@ -49,4 +49,11 @@ public class SpottedService {
 		Spotted spotted = this.spottedRepository.findById(id).get();
 		return spotted.getComments();
 	}
+
+	public Spotted update(Long id, Spotted spotted) {
+		if (this.spottedRepository.existsById(id)) {
+			this.spottedRepository.save(spotted);
+		}
+		return spotted;
+	}
 }
