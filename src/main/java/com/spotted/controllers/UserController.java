@@ -46,5 +46,9 @@ public class UserController {
 	public User findUserByEmail(@PathVariable String email) {
 		return this.userService.findUserByEmail(email);
 	}
-
+	
+	@RequestMapping(value = "/user/{id}/notify", method = RequestMethod.PUT)
+	public User notify(@PathVariable Long id, @RequestBody User user) {
+		return this.userService.notify(id, user);
+	}
 }

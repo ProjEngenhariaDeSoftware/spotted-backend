@@ -1,12 +1,14 @@
 package com.spotted.models;
 
+import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
 
 @Entity
 @Table(name = "customer")
@@ -21,6 +23,9 @@ public class User {
 	@NotNull(message = "username can not be null")
 	@NotEmpty(message = "username can not be empty")
 	private String username;
+	
+	@Column(name = "notifications")
+	private Set<Notification> notifications;
 	
 	public User() {}
 	
@@ -44,7 +49,6 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	@Override
 	public boolean equals(Object o) {

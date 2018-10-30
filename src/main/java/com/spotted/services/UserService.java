@@ -39,4 +39,9 @@ public class UserService {
 		this.save(find);
 		return find;
 	}
+
+	public User notify(Long id, User user) {
+		
+		return null;
+	}
 }
