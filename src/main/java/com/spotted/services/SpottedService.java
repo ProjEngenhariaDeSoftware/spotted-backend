@@ -30,8 +30,11 @@ public class SpottedService {
 		return this.spottedRepository.findAll();
 	}
 
-	public Optional<Spotted> get(Long id) {
-		return this.spottedRepository.findById(id);
+	public Spotted get(Long id) throws Exception {
+		if (!this.spottedRepository.existsById(id)) {
+			throw new Exception("This id is not registered in the system.");
+		}
+		return this.spottedRepository.getOne(id);
 	}
 
 	public Spotted addComment(Long id, Comment comment) {
@@ -50,13 +53,14 @@ public class SpottedService {
 		return spotted.getComments();
 	}
 
-	public Spotted setVisible(Long id) {
-		Spotted spotted = null;
-		if (this.spottedRepository.existsById(id)) {
-			spotted = this.spottedRepository.getOne(id);
-			boolean visible = !spotted.getVisible();
-			spotted.setVisible(visible);
+	public Spotted setVisible(Long id) throws Exception {
+		if (!this.spottedRepository.existsById(id)) {
+			throw new Exception("This id is not registered in the system.");
 		}
-		return spotted;
+		Spotted spotted;
+		spotted = this.spottedRepository.getOne(id);
+		boolean visible = !spotted.getVisible();
+		spotted.setVisible(visible);
+		return this.spottedRepository.save(spotted);
 	}
 }
