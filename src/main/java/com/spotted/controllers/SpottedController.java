@@ -50,7 +50,7 @@ public class SpottedController {
 	}
 
 	@RequestMapping(value = "/spotted/{id}", method = RequestMethod.PUT)
-	public Spotted update(@PathVariable Long id, @RequestBody Spotted spotted) {
-		return this.spottedService.update(id, spotted);
+	public Spotted denounce(@PathVariable Long id) {
+		return this.spottedService.denounce(id);
 	}
 }

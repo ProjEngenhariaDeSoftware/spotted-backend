@@ -114,7 +114,7 @@ public class Spotted {
 		this.image = image;
 	}
 	
-	public boolean isVisible() {
+	public boolean getVisible() {
 		return visible;
 	}
 	

@@ -50,9 +50,12 @@ public class SpottedService {
 		return spotted.getComments();
 	}
 
-	public Spotted update(Long id, Spotted spotted) {
+	public Spotted denounce(Long id) {
+		Spotted spotted = null;
 		if (this.spottedRepository.existsById(id)) {
-			this.spottedRepository.save(spotted);
+			spotted = this.spottedRepository.getOne(id);
+			boolean visible = !spotted.getVisible();
+			
 		}
 		return spotted;
 	}
