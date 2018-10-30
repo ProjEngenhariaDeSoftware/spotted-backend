@@ -50,7 +50,7 @@ public class SpottedController {
 	}
 
 	@RequestMapping(value = "/spotted/{id}", method = RequestMethod.PUT)
-	public Spotted denounce(@PathVariable Long id) {
-		return this.spottedService.denounce(id);
+	public Spotted setVisible(@PathVariable Long id) {
+		return this.spottedService.setVisible(id);
 	}
 }
