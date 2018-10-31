@@ -26,6 +26,10 @@ public class Comment {
     @NotNull(message = "Comment can not be null")
     @NotEmpty(message = "Comment can not be empty")
     private String comment;
+    
+    @Column(name = "commenter")
+    @NotNull(message = "Commenter can not be null")
+    private User commenter;
 
     public Comment() {
     }
@@ -59,7 +63,15 @@ public class Comment {
         this.id = id;
     }
 
-    @Override
+    public User getCommenter() {
+		return commenter;
+	}
+
+	public void setCommenter(User commenter) {
+		this.commenter = commenter;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
