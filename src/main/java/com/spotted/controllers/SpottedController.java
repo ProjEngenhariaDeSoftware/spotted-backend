@@ -40,7 +40,7 @@ public class SpottedController {
 	}
 
 	@RequestMapping(value = "/spotted/{id}/comment", method = RequestMethod.PUT)
-	public Spotted addComment(@PathVariable Long id, @RequestBody Comment comment) {
+	public Spotted addComment(@PathVariable Long id, @RequestBody Comment comment) throws Exception {
 		return this.spottedService.addComment(id, comment);
 	}
 

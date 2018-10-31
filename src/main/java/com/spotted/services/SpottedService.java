@@ -37,14 +37,15 @@ public class SpottedService {
 		return this.spottedRepository.getOne(id);
 	}
 
-	public Spotted addComment(Long id, Comment comment) {
-		this.commentService.save(comment);
-		Spotted spotted = null;
-		if (this.spottedRepository.existsById(id)) {
-			spotted = this.spottedRepository.getOne(id);
-			spotted.addComment(comment);
-			this.spottedRepository.save(spotted);
+	public Spotted addComment(Long id, Comment comment) throws Exception {
+		if (!this.spottedRepository.existsById(id)) {
+			throw new Exception("There is not a spotted registered with this id in the system");
 		}
+		
+		this.commentService.save(comment);
+		Spotted spotted = this.spottedRepository.getOne(id);
+		spotted.addComment(comment);
+		this.spottedRepository.save(spotted);
 		return spotted;
 	}
 

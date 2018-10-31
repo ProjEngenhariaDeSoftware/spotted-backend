@@ -22,7 +22,11 @@ public class CommentService {
         return this.commentRepository.findAll();
     }
 
-    public Optional<Comment> getComment(Long id) {
-        return this.commentRepository.findById(id);
+    public Comment getComment(Long id) throws Exception {
+    	if(!this.commentRepository.existsById(id)) {
+    		throw new Exception("There is no comment registered with this id in the system");
+    	}
+        return this.commentRepository.findById(id).get();
     }
 }
+

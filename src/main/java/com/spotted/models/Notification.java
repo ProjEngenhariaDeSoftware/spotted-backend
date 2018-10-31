@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -12,7 +14,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "notification")
 public class Notification {
-
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +21,7 @@ public class Notification {
 
 	@Column(name = "user_who_mentioned")
 	@NotNull(message = "User who mentioned can not be null")
-	private User userWhoMentioned;
+	private String userWhoMentioned;
 
 	@Column(name = "publication_type")
 	@NotNull(message = "Publication type can not be null")
@@ -29,9 +30,13 @@ public class Notification {
 
 	@Column(name = "publication_id")
 	@NotNull(message = "Publication id can not be null")
-	@NotEmpty(message = "Publication id can not be empty")
 	private Long publicationId;
 
+	@ManyToOne
+	@JoinColumn(name = "user_you_mentioned", referencedColumnName = "email")
+	@NotNull(message = "User you mentioned can not be null")
+	private User userYouMentioned;
+	
 	public Long getId() {
 		return id;
 	}
@@ -40,11 +45,11 @@ public class Notification {
 		this.id = id;
 	}
 
-	public User getUserWhoMentioned() {
+	public String getUserWhoMentioned() {
 		return userWhoMentioned;
 	}
 
-	public void setUserWhoMentioned(User userWhoMentioned) {
+	public void setUserWhoMentioned(String userWhoMentioned) {
 		this.userWhoMentioned = userWhoMentioned;
 	}
 

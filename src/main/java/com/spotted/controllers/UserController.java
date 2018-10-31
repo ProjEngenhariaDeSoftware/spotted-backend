@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spotted.models.Notification;
 import com.spotted.models.User;
 import com.spotted.services.UserService;
 
@@ -47,8 +48,8 @@ public class UserController {
 		return this.userService.findUserByEmail(email);
 	}
 	
-	@RequestMapping(value = "/user/{id}/notify", method = RequestMethod.PUT)
-	public User notify(@PathVariable Long id, @RequestBody User user) {
-		return this.userService.notify(id, user);
+	@RequestMapping(value = "/user/{email}/notify", method = RequestMethod.PUT)
+	public User notify(@PathVariable String email, @RequestBody Notification notification) throws Exception {
+		return this.userService.notify(email, notification);
 	}
 }

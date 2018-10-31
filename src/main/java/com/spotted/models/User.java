@@ -3,32 +3,42 @@ package com.spotted.models;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "customer")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
 
 	@Id
 	@Column(name = "email")
 	@NotEmpty(message = "email can not be empty")
 	private String email;
-	
-	@Column(name = "username", unique=true)
+
+	@Column(name = "username", unique = true)
 	@NotNull(message = "username can not be null")
 	@NotEmpty(message = "username can not be empty")
 	private String username;
-	
+
 	@Column(name = "notifications")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Set<Notification> notifications;
-	
-	public User() {}
-	
+
+	public User() {
+	}
+
 	public User(String email, String username) {
 		this.email = email;
 		this.username = username;
@@ -50,13 +60,18 @@ public class User {
 		this.email = email;
 	}
 
+	public void addNotification(Notification notification) {
+		this.notifications.add(notification);
+	}
+	
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		User user = (User) o;
-		return Objects.equals(email, user.email) &&
-				Objects.equals(username, user.username);
+		return Objects.equals(email, user.email) && Objects.equals(username, user.username);
 	}
 
 	@Override

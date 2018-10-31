@@ -87,9 +87,10 @@ public class SpottedServiceTest extends SpottedApplicationTests {
 
     /**
      * Testa se um comentário é adicionado ao spotted corretamente.
+     * @throws Exception 
      */
     @Test
-    public void testAddComment() {
+    public void testAddComment() throws Exception {
         Spotted spottedSaved = spottedService.save(this.spotted);
 
         Assert.assertTrue("O spotted não deveria ter comentários.", spottedSaved.getComments().isEmpty());
@@ -164,7 +165,7 @@ public class SpottedServiceTest extends SpottedApplicationTests {
     }
 
     @Test
-    public void testAddCommentSpottedNonexistent() {
+    public void testAddCommentSpottedNonexistent() throws Exception {
         Comment comment = new Comment("", "Comentário de teste.");
         Long idInvalid = Long.valueOf(-1);
         Assert.assertNull("O retorno deveria ser um null.", spottedService.addComment(idInvalid, comment));
