@@ -1,5 +1,10 @@
 package com.spotted.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,15 +18,12 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "notification")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Notification {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@Column(name = "user_who_mentioned")
-	@NotNull(message = "User who mentioned can not be null")
-	private String userWhoMentioned;
 
 	@Column(name = "publication_type")
 	@NotNull(message = "Publication type can not be null")
@@ -35,7 +37,10 @@ public class Notification {
 	@ManyToOne
 	@JoinColumn(name = "user_you_mentioned", referencedColumnName = "email")
 	@NotNull(message = "User you mentioned can not be null")
-	private User userYouMentioned;
+	private User commenter;
+	
+	public Notification() {
+	}
 	
 	public Long getId() {
 		return id;
@@ -43,14 +48,6 @@ public class Notification {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getUserWhoMentioned() {
-		return userWhoMentioned;
-	}
-
-	public void setUserWhoMentioned(String userWhoMentioned) {
-		this.userWhoMentioned = userWhoMentioned;
 	}
 
 	public String getPublicationType() {
@@ -68,7 +65,15 @@ public class Notification {
 	public void setPublicationId(Long publicationId) {
 		this.publicationId = publicationId;
 	}
-
+	
+	public User getCommenter() {
+		return commenter;
+	}
+	
+	public void setCommenter(User commenter) {
+		this.commenter = commenter;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
