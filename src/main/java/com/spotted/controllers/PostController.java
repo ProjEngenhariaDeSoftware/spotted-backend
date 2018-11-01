@@ -42,9 +42,10 @@ public class PostController {
         return this.postService.getAll();
     }
 
-    @RequestMapping(value = "/post/user/{username}", method = RequestMethod.GET)
-    public List<Post> searchByUsername(@PathVariable String username) {
-        return this.postService.searchByUsername(username);
+
+    @RequestMapping(value = "/post/user/{email}", method = RequestMethod.GET)
+    public List<Post> searchByEmail(@PathVariable String email) {
+        return this.postService.searchByEmail(email);
     }
 
     @RequestMapping(value = "/post/id/{id}", method = RequestMethod.GET)

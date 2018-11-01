@@ -11,8 +11,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long>  {
 	
-	@Query("select p from Post p where p.username = ?1")
-	List<Post> postsByUsername(String username);
+
+	@Query("select p from Post p where p.email = ?1")
+	List<Post> postsByEmail(String email);
 	
 	@Query("select p from Post p where p.id = ?1")
 	Post postsById(Long id);
