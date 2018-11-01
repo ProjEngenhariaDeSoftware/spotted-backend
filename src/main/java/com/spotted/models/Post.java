@@ -1,15 +1,20 @@
 package com.spotted.models;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -17,10 +22,13 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.spotted.enums.PostTypes;
 
 @Entity
 @Table(name = "post")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Post {
 	
 	@Id
@@ -44,6 +52,11 @@ public class Post {
 	@Lob
 	@Column(name = "image")
 	private byte[] image;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "post_id", referencedColumnName = "id")
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	private Set<Comment> comments;
 	
 	@Column(name = "datetime")
 	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
@@ -106,5 +119,17 @@ public class Post {
 
 	public void setDatetime(LocalDateTime datetime) {
 		this.datetime = datetime;
+	}
+	
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public void addComment(Comment comment) {
+		this.comments.add(comment);
 	}
 }
