@@ -20,10 +20,6 @@ public class Notification {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "user_mentioned")
-	@NotNull(message = "User mentioned can not be null")
-	private String userMentioned;
-
 	@Column(name = "publication_type")
 	@NotNull(message = "Publication type can not be null")
 	@NotEmpty(message = "Publication type can not be empty")
@@ -48,16 +44,6 @@ public class Notification {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-
-
-	public String getUserMentioned() {
-		return userMentioned;
-	}
-
-	public void setUserMentioned(String userMentioned) {
-		this.userMentioned = userMentioned;
 	}
 
 	public String getUsernameCommenter() {
