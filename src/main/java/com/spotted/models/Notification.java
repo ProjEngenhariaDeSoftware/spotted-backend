@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -19,9 +20,9 @@ public class Notification {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "user_who_mentioned")
-	@NotNull(message = "User who mentioned can not be null")
-	private String userWhoMentioned;
+	@Column(name = "user_mentioned")
+	@NotNull(message = "User mentioned can not be null")
+	private String userMentioned;
 
 	@Column(name = "publication_type")
 	@NotNull(message = "Publication type can not be null")
@@ -32,10 +33,14 @@ public class Notification {
 	@NotNull(message = "Publication id can not be null")
 	private Long publicationId;
 
-	@ManyToOne
-	@JoinColumn(name = "user_you_mentioned", referencedColumnName = "email")
-	@NotNull(message = "User you mentioned can not be null")
-	private User userYouMentioned;
+	@Column(name = "username_commenter")
+	@NotNull(message = "Username commenter can not be null")
+	@NotEmpty(message = "Username commenter can not be empty")
+	private String usernameCommenter;
+	
+	@Lob
+	@Column(name = "img_commenter")
+	private byte[] imgCommenter;
 	
 	public Long getId() {
 		return id;
@@ -45,12 +50,30 @@ public class Notification {
 		this.id = id;
 	}
 
-	public String getUserWhoMentioned() {
-		return userWhoMentioned;
+
+
+	public String getUserMentioned() {
+		return userMentioned;
 	}
 
-	public void setUserWhoMentioned(String userWhoMentioned) {
-		this.userWhoMentioned = userWhoMentioned;
+	public void setUserMentioned(String userMentioned) {
+		this.userMentioned = userMentioned;
+	}
+
+	public String getUsernameCommenter() {
+		return usernameCommenter;
+	}
+
+	public void setUsernameCommenter(String usernameCommenter) {
+		this.usernameCommenter = usernameCommenter;
+	}
+
+	public byte[] getImgCommenter() {
+		return imgCommenter;
+	}
+
+	public void setImgCommenter(byte[] imgCommenter) {
+		this.imgCommenter = imgCommenter;
 	}
 
 	public String getPublicationType() {
