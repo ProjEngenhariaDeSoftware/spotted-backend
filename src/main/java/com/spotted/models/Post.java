@@ -28,10 +28,10 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@Column(name = "nickname")
-	@NotNull(message = "nickname can not be null")
-	@NotEmpty(message = "nickname can not be empty")
-	private String nickname;
+	@Column(name = "username")
+	@NotNull(message = "username can not be null")
+	@NotEmpty(message = "username can not be empty")
+	private String username;
 	
 	@Column(name = "type")
 	@NotNull(message = "Type can not be null")
@@ -52,8 +52,8 @@ public class Post {
 	
 	public Post() {}
 	
-	public Post(String nickname, String text, byte[] image) {
-		this.nickname = nickname;
+	public Post(String username, String text, byte[] image) {
+		this.username = username;
 		this.text = text;
 		this.image = image;
 	}
@@ -66,12 +66,12 @@ public class Post {
 		this.id = id;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public PostTypes getType() {
