@@ -5,15 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "notification")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Notification {
 	@Id
 	@Column(name = "id")
@@ -37,6 +39,14 @@ public class Notification {
 	@Lob
 	@Column(name = "img_commenter")
 	private byte[] imgCommenter;
+	
+	@Column(name = "username_user_commented")
+	@NotNull(message = "Username of the user who commented can not be null")
+	@NotEmpty(message = "Username of the user who commented can not be empty")
+	private String usernameUserCommented;
+	
+	public Notification() {
+	}
 	
 	public Long getId() {
 		return id;
@@ -77,7 +87,15 @@ public class Notification {
 	public void setPublicationId(Long publicationId) {
 		this.publicationId = publicationId;
 	}
-
+	
+	public String getUsernameUserCommented() {
+		return usernameUserCommented;
+	}
+	
+	public void setUsernameUserCommented(String usernameUserCommented) {
+		this.usernameUserCommented = usernameUserCommented;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
