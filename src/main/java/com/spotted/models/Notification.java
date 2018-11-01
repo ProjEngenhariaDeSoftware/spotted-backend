@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -33,11 +34,15 @@ public class Notification {
 	@Column(name = "publication_id")
 	@NotNull(message = "Publication id can not be null")
 	private Long publicationId;
-
-	@ManyToOne
-	@JoinColumn(name = "user_you_mentioned", referencedColumnName = "email")
-	@NotNull(message = "User you mentioned can not be null")
-	private User commenter;
+	
+	@Lob
+	@Column(name = "user_commented")
+	private byte[] userCommented;
+	
+	@Column(name = "username_user_commented")
+	@NotNull(message = "Username of the user who commented can not be null")
+	@NotEmpty(message = "Username of the user who commented can not be empty")
+	private String usernameUserCommented;
 	
 	public Notification() {
 	}
@@ -66,12 +71,20 @@ public class Notification {
 		this.publicationId = publicationId;
 	}
 	
-	public User getCommenter() {
-		return commenter;
+	public byte[] getUserCommented() {
+		return userCommented;
 	}
 	
-	public void setCommenter(User commenter) {
-		this.commenter = commenter;
+	public void setUserCommented(byte[] userCommented) {
+		this.userCommented = userCommented;
+	}
+	
+	public String getUsernameUserCommented() {
+		return usernameUserCommented;
+	}
+	
+	public void setUsernameUserCommented(String usernameUserCommented) {
+		this.usernameUserCommented = usernameUserCommented;
 	}
 	
 	@Override
