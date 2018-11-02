@@ -26,7 +26,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "spotted")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Spotted {
 	
 	@Id
