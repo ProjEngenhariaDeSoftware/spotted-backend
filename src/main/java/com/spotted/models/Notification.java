@@ -1,21 +1,17 @@
 package com.spotted.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "notification")
@@ -34,10 +30,15 @@ public class Notification {
 	@Column(name = "publication_id")
 	@NotNull(message = "Publication id can not be null")
 	private Long publicationId;
+
+	@Column(name = "username_commenter")
+	@NotNull(message = "Username commenter can not be null")
+	@NotEmpty(message = "Username commenter can not be empty")
+	private String usernameCommenter;
 	
 	@Lob
-	@Column(name = "user_commented")
-	private byte[] userCommented;
+	@Column(name = "img_commenter")
+	private byte[] imgCommenter;
 	
 	@Column(name = "username_user_commented")
 	@NotNull(message = "Username of the user who commented can not be null")
@@ -55,6 +56,22 @@ public class Notification {
 		this.id = id;
 	}
 
+	public String getUsernameCommenter() {
+		return usernameCommenter;
+	}
+
+	public void setUsernameCommenter(String usernameCommenter) {
+		this.usernameCommenter = usernameCommenter;
+	}
+
+	public byte[] getImgCommenter() {
+		return imgCommenter;
+	}
+
+	public void setImgCommenter(byte[] imgCommenter) {
+		this.imgCommenter = imgCommenter;
+	}
+
 	public String getPublicationType() {
 		return publicationType;
 	}
@@ -69,14 +86,6 @@ public class Notification {
 
 	public void setPublicationId(Long publicationId) {
 		this.publicationId = publicationId;
-	}
-	
-	public byte[] getUserCommented() {
-		return userCommented;
-	}
-	
-	public void setUserCommented(byte[] userCommented) {
-		this.userCommented = userCommented;
 	}
 	
 	public String getUsernameUserCommented() {
