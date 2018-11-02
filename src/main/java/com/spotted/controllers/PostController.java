@@ -1,6 +1,7 @@
 package com.spotted.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spotted.models.Comment;
 import com.spotted.models.Post;
 import com.spotted.services.PostService;
 
@@ -42,9 +44,10 @@ public class PostController {
         return this.postService.getAll();
     }
 
-    @RequestMapping(value = "/post/user/{nickname}", method = RequestMethod.GET)
-    public List<Post> searchByNickname(@PathVariable String nickname) {
-        return this.postService.searchByNickname(nickname);
+
+    @RequestMapping(value = "/post/user/{email}", method = RequestMethod.GET)
+    public List<Post> searchByEmail(@PathVariable String email) {
+        return this.postService.searchByEmail(email);
     }
 
     @RequestMapping(value = "/post/id/{id}", method = RequestMethod.GET)
@@ -56,4 +59,15 @@ public class PostController {
     public Post deleteById(@PathVariable Long id) {
         return this.postService.deleteById(id);
     }
+    
+    @RequestMapping(value = "/post/{id}/comment", method = RequestMethod.PUT)
+	public Post addComment(@PathVariable Long id, @RequestBody Comment comment) {
+		return this.postService.addComment(id, comment);
+	}
+
+	@RequestMapping(value = "/post/{id}/comment", method = RequestMethod.GET)
+	public Set<Comment> getComments(@PathVariable Long id) {
+		return this.postService.getComments(id);
+	}
+    
 }

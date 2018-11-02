@@ -3,6 +3,7 @@ package com.spotted.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -22,11 +23,18 @@ public class User {
 	@NotEmpty(message = "username can not be empty")
 	private String username;
 	
+	@Lob
+	@Column(name = "image")
+	@NotNull(message = "image can not be null")
+	@NotEmpty(message = "image can not be empty")
+	private byte[] image;
+	
 	public User() {}
 	
-	public User(String email, String username) {
+	public User(String email, String username, byte[] image) {
 		this.email = email;
 		this.username = username;
+		this.image = image;
 	}
 
 	public String getUsername() {
@@ -43,6 +51,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public byte[] getImage() {
+		return image;
+	}
+	
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 
