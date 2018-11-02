@@ -27,9 +27,7 @@ public class CommentController {
     }
 
     @RequestMapping(value = "/comment/{id}")
-    public Optional<Comment> getComment(@PathVariable Long id) {
+    public Comment getComment(@PathVariable Long id) throws Exception {
         return this.commentService.getComment(id);
     }
-    
-    
 }

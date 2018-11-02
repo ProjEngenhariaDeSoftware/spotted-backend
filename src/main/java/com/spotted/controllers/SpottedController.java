@@ -35,12 +35,12 @@ public class SpottedController {
 	}
 
 	@RequestMapping(value = "/spotted/{id}", method = RequestMethod.GET)
-	public Optional<Spotted> get(@PathVariable Long id) {
+	public Spotted get(@PathVariable Long id) throws Exception {
 		return this.spottedService.get(id);
 	}
 
 	@RequestMapping(value = "/spotted/{id}/comment", method = RequestMethod.PUT)
-	public Spotted addComment(@PathVariable Long id, @RequestBody Comment comment) {
+	public Spotted addComment(@PathVariable Long id, @RequestBody Comment comment) throws Exception {
 		return this.spottedService.addComment(id, comment);
 	}
 
@@ -50,7 +50,7 @@ public class SpottedController {
 	}
 
 	@RequestMapping(value = "/spotted/{id}", method = RequestMethod.PUT)
-	public Spotted update(@PathVariable Long id, @RequestBody Spotted spotted) {
-		return this.spottedService.update(id, spotted);
+	public Spotted setVisible(@PathVariable Long id) throws Exception {
+		return this.spottedService.setVisible(id);
 	}
 }

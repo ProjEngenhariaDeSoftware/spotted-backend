@@ -30,18 +30,22 @@ public class SpottedService {
 		return this.spottedRepository.findAll();
 	}
 
-	public Optional<Spotted> get(Long id) {
-		return this.spottedRepository.findById(id);
+	public Spotted get(Long id) throws Exception {
+		if (!this.spottedRepository.existsById(id)) {
+			throw new Exception("This id is not registered in the system.");
+		}
+		return this.spottedRepository.getOne(id);
 	}
 
-	public Spotted addComment(Long id, Comment comment) {
-		this.commentService.save(comment);
-		Spotted spotted = null;
-		if (this.spottedRepository.existsById(id)) {
-			spotted = this.spottedRepository.getOne(id);
-			spotted.addComment(comment);
-			this.spottedRepository.save(spotted);
+	public Spotted addComment(Long id, Comment comment) throws Exception {
+		if (!this.spottedRepository.existsById(id)) {
+			throw new Exception("There is not a spotted registered with this id in the system");
 		}
+		
+		this.commentService.save(comment);
+		Spotted spotted = this.spottedRepository.getOne(id);
+		spotted.addComment(comment);
+		this.spottedRepository.save(spotted);
 		return spotted;
 	}
 
@@ -50,10 +54,14 @@ public class SpottedService {
 		return spotted.getComments();
 	}
 
-	public Spotted update(Long id, Spotted spotted) {
-		if (this.spottedRepository.existsById(id)) {
-			this.spottedRepository.save(spotted);
+	public Spotted setVisible(Long id) throws Exception {
+		if (!this.spottedRepository.existsById(id)) {
+			throw new Exception("This id is not registered in the system.");
 		}
-		return spotted;
+		Spotted spotted;
+		spotted = this.spottedRepository.getOne(id);
+		boolean visible = !spotted.getVisible();
+		spotted.setVisible(visible);
+		return this.spottedRepository.save(spotted);
 	}
 }
