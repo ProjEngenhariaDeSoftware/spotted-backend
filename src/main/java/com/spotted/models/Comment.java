@@ -41,9 +41,10 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String userMentioned, String comment) {
+    public Comment(String userMentioned, String comment, User commenter) {
         this.userMentioned = userMentioned;
         this.comment = comment;
+        this.commenter = commenter;
     }
 
     public String getUserMentioned() {
