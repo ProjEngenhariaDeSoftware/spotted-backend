@@ -16,6 +16,7 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -52,6 +53,7 @@ public class User {
 		this.email = email;
 		this.username = username;
 		this.image = image;
+		this.notifications = new HashSet<>();
 	}
 	
 	public String getUsername() {
