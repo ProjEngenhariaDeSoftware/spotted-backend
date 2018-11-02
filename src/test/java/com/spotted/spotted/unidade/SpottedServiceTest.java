@@ -3,7 +3,6 @@ package com.spotted.spotted.unidade;
 import com.spotted.models.Comment;
 import com.spotted.models.Spotted;
 import com.spotted.services.SpottedService;
-import com.spotted.spotted.SpottedApplicationTests;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +20,7 @@ import java.util.Set;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpottedServiceTest extends SpottedApplicationTests {
+public class SpottedServiceTest {
 
     @Autowired
     private SpottedService spottedService;

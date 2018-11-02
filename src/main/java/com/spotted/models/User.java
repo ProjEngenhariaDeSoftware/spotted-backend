@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -38,13 +39,19 @@ public class User {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@JsonManagedReference
 	private Set<Notification> notifications;
+
+	@Lob
+	@Column(name = "image")
+	@NotNull(message = "image can not be null")
+	@NotEmpty(message = "image can not be empty")
+	private byte[] image;
 	
-	public User() {
-	}
-	
-	public User(String email, String username) {
+	public User() {}
+
+	public User(String email, String username, byte[] image) {
 		this.email = email;
 		this.username = username;
+		this.image = image;
 	}
 	
 	public String getUsername() {
@@ -67,6 +74,15 @@ public class User {
 		this.notifications.add(notification);
 	}
 	
+	public byte[] getImage() {
+		return image;
+	}
+	
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
