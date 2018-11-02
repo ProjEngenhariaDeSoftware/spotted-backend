@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -33,24 +32,19 @@ public class Comment {
     @NotNull(message = "Comment can not be null")
     @NotEmpty(message = "Comment can not be empty")
     private String comment;
-	
-	@Column(name = "username_commenter")
-	@NotNull(message = "Username commenter can not be null")
-	@NotEmpty(message = "Username commenter can not be empty")
-    private String usernameCommenter;
-	
-	@Lob
-	@Column(name = "img_commenter")
-	private byte[] imgCommenter;
+    
+    @ManyToOne
+    @NotNull(message = "Commenter can not be null")
+	@JoinColumn(name = "commenter_id", referencedColumnName = "email")
+    private User commenter;
 
     public Comment() {
     }
 
-    public Comment(String userMentioned, String comment, String usernameCommenter, byte[] imgCommenter) {
+    public Comment(String userMentioned, String comment, User commenter) {
         this.userMentioned = userMentioned;
         this.comment = comment;
-        this.usernameCommenter = usernameCommenter;
-        this.imgCommenter = imgCommenter;
+        this.commenter = commenter;
     }
 
     public String getUserMentioned() {
@@ -76,23 +70,15 @@ public class Comment {
     public void setId(Long id) {
         this.id = id;
     }
-	
-	public String getUsernameCommenter() {
-		return usernameCommenter;
+
+    public User getCommenter() {
+		return commenter;
 	}
-	
-	public void setUsernameCommenter(String usernameCommenter) {
-		this.usernameCommenter = usernameCommenter;
+
+	public void setCommenter(User commenter) {
+		this.commenter = commenter;
 	}
-	
-	public byte[] getImgCommenter() {
-		return imgCommenter;
-	}
-	
-	public void setImgCommenter(byte[] imgCommenter) {
-		this.imgCommenter = imgCommenter;
-	}
-	
+
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
