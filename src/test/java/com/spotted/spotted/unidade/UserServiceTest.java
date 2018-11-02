@@ -31,7 +31,7 @@ public class UserServiceTest extends SpottedApplicationTests {
 
     @Before
     public void setUp() {
-        this.user = new User("thiago.moura@ccc.ufcg.edu.br", "thiagomoura21");
+        this.user = new User("thiago.moura@ccc.ufcg.edu.br", "thiagomoura21", new byte[] {});
     }
 
     /**
@@ -78,7 +78,7 @@ public class UserServiceTest extends SpottedApplicationTests {
      */
     @Test
     public void testSaveEmptyEmail() {
-        User user = new User("", "thiagomoura");
+        User user = new User("", "thiagomoura", new byte[] {});
         try {
             userService.save(user);
             Assert.fail("Uma exceção deveria ter sido lançada!");
@@ -92,7 +92,7 @@ public class UserServiceTest extends SpottedApplicationTests {
      */
     @Test
     public void testSaveEmptyUsername() {
-        User user = new User("thiago.moura@ccc.ufcg.edu.br", "");
+        User user = new User("thiago.moura@ccc.ufcg.edu.br", "", new byte[] {});
         try {
             userService.save(user);
             Assert.fail("Uma exceção deveria ter sido lançada!");
@@ -106,7 +106,7 @@ public class UserServiceTest extends SpottedApplicationTests {
      */
     @Test
     public void testSaveNullUsername() {
-        User user = new User("thiago.moura@ccc.ufcg.edu.br", null);
+        User user = new User("thiago.moura@ccc.ufcg.edu.br", null, new byte[] {});
         try {
             userService.save(user);
             Assert.fail("Uma exceção deveria ter sido lançada!");
@@ -120,7 +120,7 @@ public class UserServiceTest extends SpottedApplicationTests {
      */
     @Test
     public void testSaveNullEmail() {
-        User user = new User(null, "thiagomoura");
+        User user = new User(null, "thiagomoura", new byte[] {});
         try {
             userService.save(user);
             Assert.fail("Uma exceção deveria ter sido lançada!");
@@ -134,9 +134,9 @@ public class UserServiceTest extends SpottedApplicationTests {
      */
     @Test
     public void testGetAll() {
-        User user1 = new User("thiago.moura@ccc.ufcg.edu.br", "thiagomoura21");
-        User user2 = new User("pedro.garcia@ccc.ufcg.edu.br", "pedrogarcia");
-        User user3 = new User("emanuel.da.silva@ccc.ufcg.edu.br", "emanuelDaSilva");
+        User user1 = new User("thiago.moura@ccc.ufcg.edu.br", "thiagomoura21", new byte[] {});
+        User user2 = new User("pedro.garcia@ccc.ufcg.edu.br", "pedrogarcia", new byte[] {});
+        User user3 = new User("emanuel.da.silva@ccc.ufcg.edu.br", "emanuelDaSilva", new byte[] {});
         userService.save(user1);
         userService.save(user2);
         userService.save(user3);
@@ -152,9 +152,9 @@ public class UserServiceTest extends SpottedApplicationTests {
     public void testFindUserByUsername() {
 
         User user1 = this.user;
-        User user2 = new User("thiago.santos@ccc.ufcg.edu.br", "thiagosantos");
-        User user3 = new User("emanuel.da.silva@ccc.ufcg.edu.br", "emanuelDaSilva");
-        User user4 = new User("pedro.garcia@ccc.ufcg.edu.br", "pedrogarcia");
+        User user2 = new User("thiago.santos@ccc.ufcg.edu.br", "thiagosantos", new byte[] {});
+        User user3 = new User("emanuel.da.silva@ccc.ufcg.edu.br", "emanuelDaSilva", new byte[] {});
+        User user4 = new User("pedro.garcia@ccc.ufcg.edu.br", "pedrogarcia", new byte[] {});
 
         userService.save(user1);
         userService.save(user2);
@@ -173,7 +173,7 @@ public class UserServiceTest extends SpottedApplicationTests {
     public void testFindUserByEmail() {
 
         User user1 = this.user;
-        User user2 = new User("emanuel.da.silva@ccc.ufcg.edu.br", "emanuelDaSilva");
+        User user2 = new User("emanuel.da.silva@ccc.ufcg.edu.br", "emanuelDaSilva", new byte[] {});
         userService.save(user1);
         userService.save(user2);
 
@@ -188,7 +188,7 @@ public class UserServiceTest extends SpottedApplicationTests {
     public void testUpdate() {
 
         User user1 = this.user;
-        User user2 = new User("emanuel.da.silva@ccc.ufcg.edu.br", "emanuelDaSilva");
+        User user2 = new User("emanuel.da.silva@ccc.ufcg.edu.br", "emanuelDaSilva", new byte[] {});
         userService.save(user1);
         userService.save(user2);
 
