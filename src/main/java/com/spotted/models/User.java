@@ -44,11 +44,11 @@ public class User {
 	@Column(name = "image")
 	@NotNull(message = "image can not be null")
 	@NotEmpty(message = "image can not be empty")
-	private byte[] image;
+	private String image;
 	
 	public User() {}
 	
-	public User(String email, String username, byte[] image) {
+	public User(String email, String username, String image) {
 		this.email = email;
 		this.username = username;
 		this.image = image;
@@ -74,11 +74,11 @@ public class User {
 		this.notifications.add(notification);
 	}
 	
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 	
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
