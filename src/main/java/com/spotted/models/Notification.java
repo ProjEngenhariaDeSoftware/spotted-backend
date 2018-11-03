@@ -34,16 +34,16 @@ public class Notification {
 	@Column(name = "username_commenter")
 	@NotNull(message = "Username commenter can not be null")
 	@NotEmpty(message = "Username commenter can not be empty")
-	private String usernameCommenter;
+	private String usernameUserMentioned;
 	
 	@Lob
 	@Column(name = "img_commenter")
-	private byte[] imgCommenter;
+	private String imgCommenter;
 	
 	@Column(name = "username_user_commented")
 	@NotNull(message = "Username of the user who commented can not be null")
 	@NotEmpty(message = "Username of the user who commented can not be empty")
-	private String usernameUserCommented;
+	private String usernameCommenter;
 	
 	public Notification() {
 	}
@@ -56,19 +56,19 @@ public class Notification {
 		this.id = id;
 	}
 
-	public String getUsernameCommenter() {
-		return usernameCommenter;
+	public String getUsernameUserMentioned() {
+		return usernameUserMentioned;
 	}
 
-	public void setUsernameCommenter(String usernameCommenter) {
-		this.usernameCommenter = usernameCommenter;
+	public void setUsernameUserMentioned(String usernameUserMentioned) {
+		this.usernameUserMentioned = usernameUserMentioned;
 	}
 
-	public byte[] getImgCommenter() {
+	public String getImgCommenter() {
 		return imgCommenter;
 	}
 
-	public void setImgCommenter(byte[] imgCommenter) {
+	public void setImgCommenter(String imgCommenter) {
 		this.imgCommenter = imgCommenter;
 	}
 
@@ -88,12 +88,12 @@ public class Notification {
 		this.publicationId = publicationId;
 	}
 	
-	public String getUsernameUserCommented() {
-		return usernameUserCommented;
+	public String getUsernameCommenter() {
+		return usernameCommenter;
 	}
 	
-	public void setUsernameUserCommented(String usernameUserCommented) {
-		this.usernameUserCommented = usernameUserCommented;
+	public void setUsernameCommenter(String usernameCommenter) {
+		this.usernameCommenter = usernameCommenter;
 	}
 	
 	@Override

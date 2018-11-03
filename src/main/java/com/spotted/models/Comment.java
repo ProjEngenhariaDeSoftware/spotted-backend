@@ -37,6 +37,9 @@ public class Comment {
     @NotNull(message = "Commenter can not be null")
 	@JoinColumn(name = "commenter_id", referencedColumnName = "email")
     private User commenter;
+    
+    @Column(name = "spotted_id")
+    private Long spottedId;
 
     public Comment() {
     }
@@ -78,7 +81,15 @@ public class Comment {
 	public void setCommenter(User commenter) {
 		this.commenter = commenter;
 	}
-
+	
+	public Long getSpottedId() {
+		return spottedId;
+	}
+	
+	public void setSpottedId(Long spottedId) {
+		this.spottedId = spottedId;
+	}
+	
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
