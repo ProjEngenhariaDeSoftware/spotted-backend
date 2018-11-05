@@ -65,4 +65,18 @@ public class PostService {
 		}
 		return post;
 	}
+
+	public Comment updateComment(Long idPost, Long idComment, Comment newComment) {
+		Post post = this.searchById(idPost);
+		Comment comment = null;
+		for (Comment comm: post.getComments()) {
+			if (comm.getId() == idComment) {
+				comment = comm;
+			}
+		}
+		comment.setComment(newComment.getComment());
+		comment.setUserMentioned(newComment.getUserMentioned());
+		this.postRepository.save(post);
+		return comment;
+	}
 }

@@ -69,5 +69,10 @@ public class PostController {
 	public Set<Comment> getComments(@PathVariable Long id) {
 		return this.postService.getComments(id);
 	}
+	
+	@RequestMapping(value = "/post/{idPost}/{idComment}", method = RequestMethod.PUT)
+	public Comment updateComment(@PathVariable Long idPost, @PathVariable Long idComment, @RequestBody Comment comment) {
+		return this.postService.updateComment(idPost, idComment, comment);
+	}
     
 }
