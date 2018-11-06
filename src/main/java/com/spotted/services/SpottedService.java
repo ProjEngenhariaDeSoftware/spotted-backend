@@ -29,7 +29,7 @@ public class SpottedService {
 	public List<Spotted> getAll() {
 		return this.spottedRepository.findAll();
 	}
-
+	
 	public Spotted get(Long id) throws Exception {
 		if (!this.spottedRepository.existsById(id)) {
 			throw new Exception("This id is not registered in the system.");
