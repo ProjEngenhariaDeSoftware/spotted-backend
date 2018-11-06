@@ -50,7 +50,7 @@ public class Spotted {
 	private String image;
 	
 	@Column(name = "visible")
-	private boolean visible;
+	private boolean visible = true;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "spotted_id", referencedColumnName = "id")
