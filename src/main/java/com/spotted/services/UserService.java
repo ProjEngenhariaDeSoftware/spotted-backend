@@ -30,6 +30,13 @@ public class UserService {
 		return this.userRepository.findUserByUsername(username);
 	}
 
+	public User get(String email) throws Exception {
+		if (!this.userRepository.existsById(email)) {
+			throw new Exception("There is not a user registered with this id in the system");
+		}
+		return this.userRepository.findById(email).get();
+	}
+	
 	public User findUserByEmail(String email) {
 		return this.userRepository.findUserByEmail(email);
 	}
