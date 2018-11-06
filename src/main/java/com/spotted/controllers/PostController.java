@@ -61,7 +61,7 @@ public class PostController {
     }
     
     @RequestMapping(value = "/post/{id}/comment", method = RequestMethod.PUT)
-	public Post addComment(@PathVariable Long id, @RequestBody Comment comment) {
+	public Post addComment(@PathVariable Long id, @RequestBody Comment comment) throws Exception {
 		return this.postService.addComment(id, comment);
 	}
 
@@ -71,7 +71,7 @@ public class PostController {
 	}
 	
 	@RequestMapping(value = "/post/{idPost}/{idComment}", method = RequestMethod.PUT)
-	public Comment updateComment(@PathVariable Long idPost, @PathVariable Long idComment, @RequestBody Comment comment) {
+	public Comment updateComment(@PathVariable Long idPost, @PathVariable Long idComment, @RequestBody Comment comment) throws Exception {
 		return this.postService.updateComment(idPost, idComment, comment);
 	}
     
