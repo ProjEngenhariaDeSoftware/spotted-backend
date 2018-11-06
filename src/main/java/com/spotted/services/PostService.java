@@ -43,14 +43,14 @@ public class PostService {
 		return deleted;
 	}
 	
-	public Post addComment(Long id, Comment comment) {
-		this.commentService.save(comment);
-		Post post = null;
-		if (this.postRepository.existsById(id)) {
-			post = this.postRepository.getOne(id);
-			post.addComment(comment);
-			this.postRepository.save(post);
+	public Post addComment(Long id, Comment comment) throws Exception {
+		if (!this.postRepository.existsById(id)) {
+			throw new Exception("There is not a post registered with this id in the system");
 		}
+		this.commentService.save(comment);
+		Post post = this.postRepository.getOne(id);
+		post.addComment(comment);
+		this.postRepository.save(post);
 		return post;
 	}
 	
@@ -64,5 +64,22 @@ public class PostService {
 			this.postRepository.save(post);
 		}
 		return post;
+	}
+
+	public Comment updateComment(Long idPost, Long idComment, Comment newComment) throws Exception {
+		if (!this.postRepository.existsById(idPost)) {
+			throw new Exception("There is not a post registered with this id in the system");
+		}
+		Post post = this.postRepository.getOne(idPost);
+		Comment comment = null;
+		for (Comment comm: post.getComments()) {
+			if (comm.getId() == idComment) {
+				comment = comm;
+			}
+		}
+		comment.setComment(newComment.getComment());
+		comment.setUserMentioned(newComment.getUserMentioned());
+		this.postRepository.save(post);
+		return comment;
 	}
 }
