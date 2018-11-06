@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -30,20 +32,11 @@ public class Notification {
 	@Column(name = "publication_id")
 	@NotNull(message = "Publication id can not be null")
 	private Long publicationId;
-
-	@Column(name = "username_commenter")
-	@NotNull(message = "Username commenter can not be null")
-	@NotEmpty(message = "Username commenter can not be empty")
-	private String usernameUserMentioned;
 	
-	@Lob
-	@Column(name = "img_commenter")
-	private String imgCommenter;
-	
-	@Column(name = "username_user_commented")
-	@NotNull(message = "Username of the user who commented can not be null")
-	@NotEmpty(message = "Username of the user who commented can not be empty")
-	private String usernameCommenter;
+	@ManyToOne
+	@NotNull(message = "Commenter can not be null")
+	@JoinColumn(name = "commenter_id", referencedColumnName = "email")
+	private User commenter;
 	
 	public Notification() {
 	}
@@ -55,23 +48,15 @@ public class Notification {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getUsernameUserMentioned() {
-		return usernameUserMentioned;
+	
+	public User getCommenter() {
+		return commenter;
 	}
-
-	public void setUsernameUserMentioned(String usernameUserMentioned) {
-		this.usernameUserMentioned = usernameUserMentioned;
+	
+	public void setCommenter(User commenter) {
+		this.commenter = commenter;
 	}
-
-	public String getImgCommenter() {
-		return imgCommenter;
-	}
-
-	public void setImgCommenter(String imgCommenter) {
-		this.imgCommenter = imgCommenter;
-	}
-
+	
 	public String getPublicationType() {
 		return publicationType;
 	}
@@ -86,14 +71,6 @@ public class Notification {
 
 	public void setPublicationId(Long publicationId) {
 		this.publicationId = publicationId;
-	}
-	
-	public String getUsernameCommenter() {
-		return usernameCommenter;
-	}
-	
-	public void setUsernameCommenter(String usernameCommenter) {
-		this.usernameCommenter = usernameCommenter;
 	}
 	
 	@Override

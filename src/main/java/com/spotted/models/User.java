@@ -40,8 +40,7 @@ public class User {
 	@JsonManagedReference
 	private Set<Notification> notifications;
 	
-	@Lob
-	@Column(name = "image")
+		@Column(name = "image", columnDefinition = "TEXT")
 	@NotNull(message = "image can not be null")
 	@NotEmpty(message = "image can not be empty")
 	private String image;
