@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -105,7 +106,7 @@ public class SpottedServiceTest {
         Spotted spottedSaved = spottedService.save(this.spotted);
 
         Assert.assertTrue("O spotted não deveria ter comentários.", spottedSaved.getComments().isEmpty());
-        Comment comment = new Comment("", "Comentário de teste.", this.user);
+        Comment comment = new Comment(new HashSet<>(), "Comentário de teste.", this.user);
         
         spottedService.addComment(spottedSaved.getId(), comment);
         Set<Comment> comments = spottedService.getComments(this.spotted.getId());
@@ -124,7 +125,7 @@ public class SpottedServiceTest {
 
         Assert.assertTrue("O spotted não deveria ter comentários.", spottedSaved.getComments().isEmpty());
 
-        Comment comment = new Comment("", "", this.user);
+        Comment comment = new Comment(new HashSet<>(), "", this.user);
 
         try {
             spottedService.addComment(spottedSaved.getId(), comment);
@@ -144,7 +145,7 @@ public class SpottedServiceTest {
 
         Assert.assertTrue("O spotted não deveria ter comentários.", spottedSaved.getComments().isEmpty());
 
-        Comment comment = new Comment("", null, this.user);
+        Comment comment = new Comment(new HashSet<>(), null, this.user);
 
         try {
             spottedService.addComment(spottedSaved.getId(), comment);
@@ -177,7 +178,7 @@ public class SpottedServiceTest {
 
     @Test
     public void testAddCommentSpottedNonexistent() throws Exception {
-        Comment comment = new Comment("", "Comentário de teste.", this.user);
+        Comment comment = new Comment(new HashSet<>(), "Comentário de teste.", this.user);
         Long idInvalid = Long.valueOf(-1);
 		try {
 			spottedService.addComment(idInvalid, comment);

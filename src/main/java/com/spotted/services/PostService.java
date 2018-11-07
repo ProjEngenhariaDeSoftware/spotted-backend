@@ -78,7 +78,7 @@ public class PostService {
 			}
 		}
 		comment.setComment(newComment.getComment());
-		comment.setUserMentioned(newComment.getUserMentioned());
+		comment.setUsersMentioned(newComment.getUsersMentioned());
 		this.postRepository.save(post);
 		return comment;
 	}

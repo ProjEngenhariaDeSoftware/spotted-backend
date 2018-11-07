@@ -1,15 +1,9 @@
 package com.spotted.models;
 
 import java.util.Objects;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -25,8 +19,8 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_mentioned")
-    private String userMentioned;
+    @ElementCollection
+    private Set<String> usersMentioned;
 
     @Column(name = "comment")
     @NotNull(message = "Comment can not be null")
@@ -44,18 +38,18 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String userMentioned, String comment, User commenter) {
-        this.userMentioned = userMentioned;
+    public Comment(Set<String> usersMentioned, String comment, User commenter) {
+        this.usersMentioned = usersMentioned;
         this.comment = comment;
         this.commenter = commenter;
     }
 
-    public String getUserMentioned() {
-        return userMentioned;
+    public Set<String> getUsersMentioned() {
+        return usersMentioned;
     }
 
-    public void setUserMentioned(String userMentioned) {
-        this.userMentioned = userMentioned;
+    public void setUsersMentioned(Set<String> usersMentioned) {
+        this.usersMentioned = usersMentioned;
     }
 
     public String getComment() {
@@ -96,12 +90,12 @@ public class Comment {
         if (o == null || getClass() != o.getClass()) return false;
         Comment comment1 = (Comment) o;
         return Objects.equals(id, comment1.id) &&
-                Objects.equals(userMentioned, comment1.userMentioned) &&
+                Objects.equals(usersMentioned, comment1.usersMentioned) &&
                 Objects.equals(comment, comment1.comment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userMentioned, comment);
+        return Objects.hash(id, usersMentioned, comment);
     }
 }
