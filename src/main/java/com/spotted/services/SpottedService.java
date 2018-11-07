@@ -64,4 +64,8 @@ public class SpottedService {
 		spotted.setVisible(visible);
 		return this.spottedRepository.save(spotted);
 	}
+	
+	public void delete(Long id) {
+		this.spottedRepository.deleteById(id);
+	}
 }

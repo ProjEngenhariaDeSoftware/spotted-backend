@@ -53,4 +53,14 @@ public class SpottedController {
 	public Spotted setVisible(@PathVariable Long id) throws Exception {
 		return this.spottedService.setVisible(id);
 	}
+	
+	@RequestMapping(value = "/spotted/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable Long id) {
+		this.spottedService.delete(id);
+	}
+	
+	@RequestMapping(value = "/spotted/{id}/to-report", method = RequestMethod.PUT)
+	public Spotted toReport(@PathVariable Long id) throws Exception {
+		return this.spottedService.setVisible(id);
+	}
 }
