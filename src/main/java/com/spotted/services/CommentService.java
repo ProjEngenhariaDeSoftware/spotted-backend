@@ -1,12 +1,12 @@
 package com.spotted.services;
 
-import com.spotted.models.Comment;
-import com.spotted.repositories.CommentRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.spotted.models.Comment;
+import com.spotted.repositories.CommentRepository;
 
 @Service
 public class CommentService {
@@ -28,5 +28,9 @@ public class CommentService {
     	}
         return this.commentRepository.findById(id).get();
     }
+    
+    public void delete(Long id) {
+    	this.commentRepository.deleteById(id);
+	}
 }
 

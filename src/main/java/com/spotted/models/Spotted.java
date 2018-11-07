@@ -47,13 +47,13 @@ public class Spotted {
 	
 	@Lob
 	@Column(name = "image")
-	private byte[] image;
+	private String image;
 	
 	@Column(name = "visible")
-	private boolean visible;
-
+	private boolean visible = true;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "comment_id", referencedColumnName = "id")
+	@JoinColumn(name = "spotted_id", referencedColumnName = "id")
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Set<Comment> comments;
 	
@@ -65,7 +65,7 @@ public class Spotted {
 	public Spotted() {
 	}
 	
-	public Spotted(String location, String course, String text, byte[] image, boolean visible) {
+	public Spotted(String location, String course, String text, String image, boolean visible) {
 		this.location = location;
 		this.course = course;
 		this.text = text;
@@ -106,11 +106,11 @@ public class Spotted {
 		this.text = text;
 	}
 	
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 	
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 	
@@ -121,40 +121,19 @@ public class Spotted {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-
+	
 	public Set<Comment> getComments() {
 		return comments;
 	}
-
+	
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
-
+	
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
 	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Spotted spotted = (Spotted) o;
-		return visible == spotted.visible &&
-				Objects.equals(id, spotted.id) &&
-				Objects.equals(location, spotted.location) &&
-				Objects.equals(course, spotted.course) &&
-				Objects.equals(text, spotted.text) &&
-				Arrays.equals(image, spotted.image) &&
-				Objects.equals(comments, spotted.comments);
-	}
-
-	@Override
-	public int hashCode() {
-		int result = Objects.hash(id, location, course, text, visible, comments);
-		result = 31 * result + Arrays.hashCode(image);
-		return result;
-	}
-
+	
 	public LocalDateTime getDatetime() {
 		return datetime;
 	}
@@ -162,4 +141,22 @@ public class Spotted {
 	public void setDatetime(LocalDateTime datetime) {
 		this.datetime = datetime;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Spotted spotted = (Spotted) o;
+		return visible == spotted.visible && Objects.equals(id, spotted.id) && Objects.equals(location, spotted.location) && Objects.equals(course, spotted.course) && Objects.equals(text, spotted.text) && Objects.equals(image, spotted.image) && Objects.equals(comments, spotted.comments) && Objects.equals(datetime, spotted.datetime);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, location, course, text, image, visible, comments, datetime);
+	}
+	
 }

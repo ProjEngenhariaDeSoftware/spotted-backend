@@ -3,31 +3,22 @@ package com.spotted.controllers;
 import com.spotted.models.Comment;
 import com.spotted.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "api/")
 @CrossOrigin(value = "*")
 public class CommentController {
-
-    @Autowired
-    CommentService commentService;
-
-    @RequestMapping(value = "/comment", method = RequestMethod.POST)
-    public Comment save(@RequestBody Comment comment) {
-        return this.commentService.save(comment);
-    }
-
-    @RequestMapping(value = "/comment", method = RequestMethod.GET)
-    public List<Comment> getAll() {
-        return this.commentService.getAll();
-    }
-
-    @RequestMapping(value = "/comment/{id}")
-    public Comment getComment(@PathVariable Long id) throws Exception {
-        return this.commentService.getComment(id);
-    }
+	
+	@Autowired
+	CommentService commentService;
+	
+	@RequestMapping(value = "/comment/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable Long id) {
+		this.commentService.delete(id);
+	}
 }
