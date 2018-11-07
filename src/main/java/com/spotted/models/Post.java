@@ -1,6 +1,9 @@
 package com.spotted.models;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -66,10 +69,12 @@ public class Post {
 	public Post() {}
 	
 
-	public Post(String email, String text, byte[] image) {
+	public Post(String email, String text, byte[] image, PostTypes type) {
 		this.email = email;
 		this.text = text;
 		this.image = image;
+		this.type = type;
+		this.comments = new HashSet<>();
 	}
 
 	public Long getId() {
@@ -132,4 +137,25 @@ public class Post {
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Post post = (Post) o;
+        return Objects.equals(id, post.id) &&
+                Objects.equals(email, post.email) &&
+                type == post.type &&
+                Objects.equals(text, post.text) &&
+                Arrays.equals(image, post.image) &&
+                Objects.equals(comments, post.comments) &&
+                Objects.equals(datetime, post.datetime);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, email, type, text, comments, datetime);
+        result = 31 * result + Arrays.hashCode(image);
+        return result;
+    }
 }

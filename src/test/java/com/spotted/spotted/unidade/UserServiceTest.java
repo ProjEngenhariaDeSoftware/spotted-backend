@@ -2,7 +2,6 @@ package com.spotted.spotted.unidade;
 
 import com.spotted.models.User;
 import com.spotted.services.UserService;
-import com.spotted.spotted.SpottedApplicationTests;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,7 @@ import static java.util.Arrays.asList;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceTest extends SpottedApplicationTests {
+public class UserServiceTest {
 
     @Autowired
     private UserService userService;

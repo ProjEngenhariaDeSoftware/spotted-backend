@@ -16,6 +16,7 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -39,18 +40,20 @@ public class User {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@JsonManagedReference
 	private Set<Notification> notifications;
+
 	
-		@Column(name = "image", columnDefinition = "TEXT")
+	@Column(name = "image", columnDefinition = "TEXT")
 	@NotNull(message = "image can not be null")
 	@NotEmpty(message = "image can not be empty")
 	private String image;
 	
 	public User() {}
-	
+
 	public User(String email, String username, String image) {
 		this.email = email;
 		this.username = username;
 		this.image = image;
+		this.notifications = new HashSet<>();
 	}
 	
 	public String getUsername() {

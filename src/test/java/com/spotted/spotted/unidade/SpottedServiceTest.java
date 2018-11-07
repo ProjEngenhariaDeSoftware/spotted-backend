@@ -5,7 +5,6 @@ import com.spotted.models.Spotted;
 import com.spotted.models.User;
 import com.spotted.services.SpottedService;
 import com.spotted.services.UserService;
-import com.spotted.spotted.SpottedApplicationTests;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.util.AssertionErrors;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,7 +23,7 @@ import java.util.Set;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpottedServiceTest extends SpottedApplicationTests {
+public class SpottedServiceTest {
 
     @Autowired
     private SpottedService spottedService;
@@ -73,11 +72,13 @@ public class SpottedServiceTest extends SpottedApplicationTests {
     @Test
     public void testSaveNull() {
         Spotted spotted = null;
+        List<Spotted> spotteds = this.spottedService.getAll();
         try {
             spottedService.save(spotted);
             Assert.fail("Uma exceção deveria ter sido lançada.");
         } catch (Exception e) {
-            Assert.assertFalse("O spotted não deveria ter sido salvo.", spottedService.getAll().contains(spotted));
+            Assert.assertArrayEquals("As listas deveriam ser iguais.",
+                    spotteds.toArray(), this.spottedService.getAll().toArray());
         }
     }
 
