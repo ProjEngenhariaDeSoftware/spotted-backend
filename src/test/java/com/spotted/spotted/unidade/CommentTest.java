@@ -9,6 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.spotted.models.Comment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Testes de unidade para {@link Comment}
  * @author cassioegc
@@ -23,7 +26,7 @@ public class CommentTest {
     @Before
     public void setUp() {
         this.user = new User("teste@teste", "teste", "");
-        this.comment = new Comment("", "Comentário de teste.", this.user, null);
+        this.comment = new Comment(new ArrayList<>(), "Comentário de teste.", this.user, null);
     }
 
     /**
@@ -31,7 +34,7 @@ public class CommentTest {
      */
     @Test
     public void testEquals() {
-        Comment comment = new Comment("", "Comentário de teste.", this.user, null);
+        Comment comment = new Comment(new ArrayList<>(), "Comentário de teste.", this.user, null);
         Assert.assertEquals("Os comentários deveriam ser iguais.", this.comment, comment);
     }
 
@@ -40,7 +43,7 @@ public class CommentTest {
      */
     @Test
     public void testEqualsDifferentComments() {
-        Comment comment = new Comment("UserTest", "Comentário de teste.", this.user, null);
+        Comment comment = new Comment(new ArrayList<>(), "Comentário de teste.", this.user, null);
         Assert.assertNotEquals("Os comentários não deveriam ser iguais.", this.comment, comment);
     }
 
@@ -49,8 +52,8 @@ public class CommentTest {
      */
     @Test
     public void testUserMentioned() {
-        Comment comment = new Comment("UserTest", "Comentário de teste 2.", this.user, null);
-        Assert.assertEquals("O usuário retornado não é o esperado.","UserTest", comment.getUserMentioned());
+        Comment comment = new Comment(Arrays.asList("UserTest"), "Comentário de teste 2.", this.user, null);
+        Assert.assertEquals("O usuário retornado não é o esperado.", Arrays.asList("UserTest"), comment.getUsersMentioned());
     }
 
     /**

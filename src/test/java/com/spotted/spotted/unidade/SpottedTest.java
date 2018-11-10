@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  * Testes de unidade para {@link Spotted}
@@ -35,7 +36,7 @@ public class SpottedTest {
      */
     @Test
     public void testAddComment() {
-        Comment comment = new Comment("", "Comentário de teste", this.user, null);
+        Comment comment = new Comment(new ArrayList<>(), "Comentário de teste", this.user, null);
         this.spotted.addComment(comment);
         Assert.assertTrue("O spotted deveria conter o comentário.",
                 this.spotted.getComments().contains(comment));
@@ -46,7 +47,7 @@ public class SpottedTest {
      */
     @Test
     public void testEqualsDifferentSpotteds() {
-        Comment comment = new Comment("", "Comentário de teste", this.user, null);
+        Comment comment = new Comment(new ArrayList<>(), "Comentário de teste", this.user, null);
         Spotted spottedAux = this.spotted;
         this.spotted.addComment(comment);
         Assert.assertEquals("Os spotteds deveriam ser diferentes.",

@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -105,8 +107,8 @@ public class SpottedServiceTest {
         Spotted spottedSaved = spottedService.save(this.spotted);
 
         Assert.assertTrue("O spotted não deveria ter comentários.", spottedSaved.getComments().isEmpty());
-        Comment comment = new Comment("", "Comentário de teste.", this.user, null);
-        
+        Comment comment = new Comment(new ArrayList<>(), "Comentário de teste.", this.user, null);
+
         spottedService.addComment(spottedSaved.getId(), comment);
         Set<Comment> comments = spottedService.getComments(this.spotted.getId());
 
@@ -124,8 +126,7 @@ public class SpottedServiceTest {
 
         Assert.assertTrue("O spotted não deveria ter comentários.", spottedSaved.getComments().isEmpty());
 
-        Comment comment = new Comment("", "", this.user, null);
-
+        Comment comment = new Comment(new ArrayList<>(), "", this.user, null);
         try {
             spottedService.addComment(spottedSaved.getId(), comment);
             Assert.fail("O comentário não deveria ter sido salvo.");
@@ -144,7 +145,7 @@ public class SpottedServiceTest {
 
         Assert.assertTrue("O spotted não deveria ter comentários.", spottedSaved.getComments().isEmpty());
 
-        Comment comment = new Comment("", null, this.user, null);
+        Comment comment = new Comment(new ArrayList<>(), null, this.user, null);
 
         try {
             spottedService.addComment(spottedSaved.getId(), comment);
@@ -177,7 +178,7 @@ public class SpottedServiceTest {
 
     @Test
     public void testAddCommentSpottedNonexistent() throws Exception {
-        Comment comment = new Comment("", "Comentário de teste.", this.user, null);
+        Comment comment = new Comment(new ArrayList<>(), "Comentário de teste.", this.user, null);
         Long idInvalid = Long.valueOf(-1);
 		try {
 			spottedService.addComment(idInvalid, comment);

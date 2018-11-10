@@ -78,8 +78,19 @@ public class PostService {
 			}
 		}
 		comment.setComment(newComment.getComment());
-		comment.setUserMentioned(newComment.getUserMentioned());
+		comment.setUsersMentioned(newComment.getUsersMentioned());
 		this.postRepository.save(post);
 		return comment;
+	}
+	
+	public Post setVisible(Long id) throws Exception {
+		if (!this.postRepository.existsById(id)) {
+			throw new Exception("This id is not registered in the system.");
+		}
+		
+		Post post = this.postRepository.getOne(id);
+		boolean visible = !post.isVisible();
+		post.setVisible(visible);
+		return this.postRepository.save(post);
 	}
 }

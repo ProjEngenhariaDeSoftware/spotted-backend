@@ -14,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Testes de integracao para {@link PostService}
@@ -154,7 +157,8 @@ public class PostServiceTest {
     public void testAddComment() {
         Post postSaved = this.postService.save(this.post);
         this.userService.save(this.user);
-        Comment comment = new Comment("", "Comentário de teste.", this.user, null);
+
+        Comment comment = new Comment(new ArrayList<>(), "Comentário de teste.", this.user, null);
         try {
             this.postService.addComment(postSaved.getId(), comment);
         } catch(Exception e) {
@@ -187,7 +191,7 @@ public class PostServiceTest {
     public void testAddCommentPostNonexistent() {
         this.postService.save(this.post);
         this.userService.save(this.user);
-        Comment comment = new Comment("", "Comentário de teste.", this.user, null);
+        Comment comment = new Comment(new ArrayList<>(), "Comentário de teste.", this.user, null);
         Long id = Long.valueOf(-1);
         try {
             Post post = this.postService.addComment(id, comment);
