@@ -66,6 +66,9 @@ public class Post {
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDateTime datetime;
 	
+	@Column(name = "visible")
+	private boolean visible = true;
+	
 	public Post() {}
 	
 
@@ -137,8 +140,16 @@ public class Post {
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
 	}
-
-    @Override
+	
+	public boolean isVisible() {
+		return visible;
+	}
+	
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

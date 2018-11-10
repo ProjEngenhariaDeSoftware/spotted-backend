@@ -74,5 +74,10 @@ public class PostController {
 	public Comment updateComment(@PathVariable Long idPost, @PathVariable Long idComment, @RequestBody Comment comment) throws Exception {
 		return this.postService.updateComment(idPost, idComment, comment);
 	}
-    
+	
+	@RequestMapping(value = "/spotted/{id}", method = RequestMethod.PUT)
+	public Post setVisible(@PathVariable Long id) throws Exception {
+		return this.postService.setVisible(id);
+	}
+	
 }
