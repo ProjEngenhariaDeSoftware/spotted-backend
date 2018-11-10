@@ -1,4 +1,4 @@
-package com.spotted.spotted.unidade;
+package com.spotted.spotted.integracao;
 
 import com.spotted.models.User;
 import com.spotted.services.UserService;
@@ -15,7 +15,7 @@ import static java.util.Arrays.asList;
 
 
 /**
- * Testes de unidade para {@link UserService}
+ * Testes de integracao para {@link UserService}
  *
  * @author thiagomoura21
  */

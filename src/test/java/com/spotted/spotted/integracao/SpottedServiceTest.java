@@ -1,4 +1,4 @@
-package com.spotted.spotted.unidade;
+package com.spotted.spotted.integracao;
 
 import com.spotted.models.Comment;
 import com.spotted.models.Spotted;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Testes de unidade para {@link SpottedService}
+ * Testes de integracao para {@link SpottedService}
  *
  * @author cassioegc
  */
@@ -105,7 +105,7 @@ public class SpottedServiceTest {
         Spotted spottedSaved = spottedService.save(this.spotted);
 
         Assert.assertTrue("O spotted não deveria ter comentários.", spottedSaved.getComments().isEmpty());
-        Comment comment = new Comment("", "Comentário de teste.", this.user);
+        Comment comment = new Comment("", "Comentário de teste.", this.user, null);
         
         spottedService.addComment(spottedSaved.getId(), comment);
         Set<Comment> comments = spottedService.getComments(this.spotted.getId());
@@ -124,7 +124,7 @@ public class SpottedServiceTest {
 
         Assert.assertTrue("O spotted não deveria ter comentários.", spottedSaved.getComments().isEmpty());
 
-        Comment comment = new Comment("", "", this.user);
+        Comment comment = new Comment("", "", this.user, null);
 
         try {
             spottedService.addComment(spottedSaved.getId(), comment);
@@ -144,7 +144,7 @@ public class SpottedServiceTest {
 
         Assert.assertTrue("O spotted não deveria ter comentários.", spottedSaved.getComments().isEmpty());
 
-        Comment comment = new Comment("", null, this.user);
+        Comment comment = new Comment("", null, this.user, null);
 
         try {
             spottedService.addComment(spottedSaved.getId(), comment);
@@ -177,7 +177,7 @@ public class SpottedServiceTest {
 
     @Test
     public void testAddCommentSpottedNonexistent() throws Exception {
-        Comment comment = new Comment("", "Comentário de teste.", this.user);
+        Comment comment = new Comment("", "Comentário de teste.", this.user, null);
         Long idInvalid = Long.valueOf(-1);
 		try {
 			spottedService.addComment(idInvalid, comment);

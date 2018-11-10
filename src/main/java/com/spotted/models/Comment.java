@@ -44,10 +44,11 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String userMentioned, String comment, User commenter) {
+    public Comment(String userMentioned, String comment, User commenter, Long spottedId) {
         this.userMentioned = userMentioned;
         this.comment = comment;
         this.commenter = commenter;
+        this.spottedId = spottedId;
     }
 
     public String getUserMentioned() {
