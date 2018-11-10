@@ -1,5 +1,6 @@
 package com.spotted.models;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public class Comment {
     private Long id;
 
     @ElementCollection
-    private Set<String> usersMentioned;
+    private List<String> usersMentioned;
 
     @Column(name = "comment")
     @NotNull(message = "Comment can not be null")
@@ -38,17 +39,17 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(Set<String> usersMentioned, String comment, User commenter) {
+    public Comment(List<String> usersMentioned, String comment, User commenter) {
         this.usersMentioned = usersMentioned;
         this.comment = comment;
         this.commenter = commenter;
     }
 
-    public Set<String> getUsersMentioned() {
+    public List<String> getUsersMentioned() {
         return usersMentioned;
     }
 
-    public void setUsersMentioned(Set<String> usersMentioned) {
+    public void setUsersMentioned(List<String> usersMentioned) {
         this.usersMentioned = usersMentioned;
     }
 
@@ -84,6 +85,10 @@ public class Comment {
 		this.spottedId = spottedId;
 	}
 	
+	public void addUserMentioned(String username) {
+    	this.usersMentioned.add(username);
+	}
+	
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -98,4 +103,13 @@ public class Comment {
     public int hashCode() {
         return Objects.hash(id, usersMentioned, comment);
     }
+	
+	@Override
+	public String toString() {
+		String s ="";
+		for(int i = 0; i < usersMentioned.size(); i++) {
+			s += usersMentioned.get(i);
+		}
+		return s;
+	}
 }
