@@ -45,8 +45,7 @@ public class Spotted {
 	@NotEmpty(message = "Spotted text can not be empty")
 	private String text;
 	
-	@Lob
-	@Column(name = "image")
+	@Column(name = "image", columnDefinition = "TEXT")
 	private String image;
 	
 	@Column(name = "visible")
