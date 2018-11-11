@@ -163,8 +163,8 @@ public class PostServiceTest {
         } catch(Exception e) {
             Assert.fail("O comentário deveria ter sido salvo sem falhas.");
         }
-        Post post = this.postService.getAll().stream().filter(p -> p.getId().equals(postSaved.getId())).findFirst().get();
-        Assert.assertTrue("O comentário deveria ter sido inserido.", post.getComments().contains(comment));
+        Post post = this.postService.searchById(postSaved.getId());
+        Assert.assertEquals("O comentário deveria ter sido inserido.", post.getComments().toArray()[0], comment);
     }
 
     /**

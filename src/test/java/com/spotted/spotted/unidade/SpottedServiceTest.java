@@ -113,8 +113,8 @@ public class SpottedServiceTest {
         Set<Comment> comments = spottedService.getComments(this.spotted.getId());
 
         Assert.assertFalse("O spotted deveria ter comentários.", comments.isEmpty());
-        Assert.assertTrue("O comentário deveria estar no conjunto de comentários do spotted",
-                    comments.contains(comment));
+        Assert.assertEquals("O comentário deveria estar no conjunto de comentários do spotted",
+                comments.toArray()[0], comment);
     }
 
     /**
