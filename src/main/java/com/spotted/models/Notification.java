@@ -39,6 +39,12 @@ public class Notification {
 	
 	public Notification() {
 	}
+
+	public Notification(String publicationType, Long publicationId, User commenter) {
+		this.publicationType = publicationType;
+		this.publicationId = publicationId;
+		this.commenter = commenter;
+	}
 	
 	public Long getId() {
 		return id;

@@ -61,6 +61,15 @@ public class CommentTest {
      */
     @Test
     public void testGetSpottedId() {
-        Assert.assertNull("O comentário não deveria ter o id do Spotted. ", this.comment.getSpottedId());
+        Assert.assertNull("O comentário não deveria ter spottedId. ", this.comment.getSpottedId());
+    }
+
+    /**
+     * Testa se o spottedId é atribuido corretamente.
+     */
+    @Test
+    public void testSpottedId() {
+        Comment comment = new Comment(Arrays.asList("UserTest"), "Comentário de teste 2.", this.user, 1L);
+        Assert.assertNotNull("O spottedId não deveria ser null.", comment.getSpottedId());
     }
 }

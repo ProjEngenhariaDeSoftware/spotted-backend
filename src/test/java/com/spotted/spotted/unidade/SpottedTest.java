@@ -73,4 +73,13 @@ public class SpottedTest {
         Assert.assertNotEquals(this.spotted, spottedAux);
     }
 
+    /**
+     * Testa a alteração de visibilidade do Spotted.
+     */
+    @Test
+    public void testVisible() {
+        this.spotted.setVisible(false);
+        Assert.assertFalse("O spotted não deveria estar visível.", this.spotted.getVisible());
+    }
+
 }

@@ -83,6 +83,8 @@ public class User {
 		this.image = image;
 	}
 
+	public Set<Notification> getNotifications() { return this.notifications; }
+
 
 	@Override
 	public boolean equals(Object o) {
