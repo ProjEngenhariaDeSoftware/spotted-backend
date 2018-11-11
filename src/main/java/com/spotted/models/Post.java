@@ -49,6 +49,11 @@ public class Post {
 	@Enumerated(EnumType.STRING)
 	private PostTypes type;
 	
+	@Column(name = "title")
+	@NotNull(message = "title can not be null")
+	@NotEmpty(message = "title can not be empty")
+	private String title;
+	
 	@Column(name = "text")
 	private String text;
 	
@@ -61,6 +66,17 @@ public class Post {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Set<Comment> comments;
 	
+	@Column(name = "start")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+	private LocalDateTime start;
+	
+	@Column(name = "end")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+	private LocalDateTime end;
+	
+	
 	@Column(name = "datetime")
 	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
@@ -72,11 +88,12 @@ public class Post {
 	public Post() {}
 	
 
-	public Post(String email, String text, byte[] image, PostTypes type) {
+	public Post(String email, String text, byte[] image, PostTypes type, String title) {
 		this.email = email;
 		this.text = text;
 		this.image = image;
 		this.type = type;
+		this.title = title;
 		this.comments = new HashSet<>();
 	}
 
