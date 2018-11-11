@@ -43,7 +43,7 @@ public class CommentTest {
      */
     @Test
     public void testEqualsDifferentComments() {
-        Comment comment = new Comment(new ArrayList<>(), "Comentário de teste.", this.user, null);
+        Comment comment = new Comment(Arrays.asList("UserTest"), "Comentário de teste.", this.user, null);
         Assert.assertNotEquals("Os comentários não deveriam ser iguais.", this.comment, comment);
     }
 
@@ -53,7 +53,7 @@ public class CommentTest {
     @Test
     public void testUserMentioned() {
         Comment comment = new Comment(Arrays.asList("UserTest"), "Comentário de teste 2.", this.user, null);
-        Assert.assertEquals("O usuário retornado não é o esperado.", Arrays.asList("UserTest"), comment.getUsersMentioned());
+        Assert.assertEquals("O usuário retornado não é o esperado.", "UserTest", comment.getUsersMentioned().toArray()[0]);
     }
 
     /**

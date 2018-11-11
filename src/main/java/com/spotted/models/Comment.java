@@ -1,10 +1,18 @@
 package com.spotted.models;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -98,7 +106,7 @@ public class Comment {
         if (o == null || getClass() != o.getClass()) return false;
         Comment comment1 = (Comment) o;
         return Objects.equals(id, comment1.id) &&
-                Objects.equals(usersMentioned, comment1.usersMentioned) &&
+                Objects.equals(Arrays.asList(usersMentioned.toArray()), Arrays.asList(comment1.usersMentioned.toArray())) &&
                 Objects.equals(comment, comment1.comment);
     }
 

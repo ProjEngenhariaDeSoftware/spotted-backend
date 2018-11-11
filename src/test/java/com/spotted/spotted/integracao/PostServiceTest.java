@@ -15,9 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Testes de integracao para {@link PostService}
@@ -164,8 +162,8 @@ public class PostServiceTest {
         } catch(Exception e) {
             Assert.fail("O comentário deveria ter sido salvo sem falhas.");
         }
-        Post post = this.postService.getAll().stream().filter(p -> p.getId().equals(postSaved.getId())).findFirst().get();
-        Assert.assertTrue("O comentário deveria ter sido inserido.", post.getComments().contains(comment));
+        Post post = this.postService.searchById(postSaved.getId());
+        Assert.assertEquals("O comentário deveria ter sido inserido.", post.getComments().toArray()[0], comment);
     }
 
     /**
