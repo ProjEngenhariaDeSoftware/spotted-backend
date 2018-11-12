@@ -3,9 +3,16 @@ package com.spotted.models;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -39,11 +46,12 @@ public class Comment {
 
     public Comment() {
     }
-
-    public Comment(List<String> usersMentioned, String comment, User commenter) {
+    public Comment(List<String> usersMentioned, String comment, User commenter, Long spottedId) {
         this.usersMentioned = usersMentioned;
         this.comment = comment;
         this.commenter = commenter;
+        this.spottedId = spottedId;
+        this.spottedId = spottedId;
     }
 
     public List<String> getUsersMentioned() {
@@ -89,6 +97,8 @@ public class Comment {
 	public void addUserMentioned(String username) {
     	this.usersMentioned.add(username);
 	}
+
+
 	
 	@Override
     public boolean equals(Object o) {

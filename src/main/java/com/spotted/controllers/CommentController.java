@@ -1,6 +1,5 @@
 package com.spotted.controllers;
 
-import com.spotted.models.Comment;
 import com.spotted.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

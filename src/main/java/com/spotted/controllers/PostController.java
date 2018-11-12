@@ -3,6 +3,7 @@ package com.spotted.controllers;
 import java.util.List;
 import java.util.Set;
 
+import com.spotted.enums.PostTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -79,5 +80,4 @@ public class PostController {
 	public Post setVisible(@PathVariable Long id) throws Exception {
 		return this.postService.setVisible(id);
 	}
-	
 }

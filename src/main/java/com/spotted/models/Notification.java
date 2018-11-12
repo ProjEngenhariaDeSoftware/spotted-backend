@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -39,6 +38,12 @@ public class Notification {
 	private User commenter;
 	
 	public Notification() {
+	}
+
+	public Notification(String publicationType, Long publicationId, User commenter) {
+		this.publicationType = publicationType;
+		this.publicationId = publicationId;
+		this.commenter = commenter;
 	}
 	
 	public Long getId() {

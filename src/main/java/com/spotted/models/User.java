@@ -12,7 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -83,6 +82,8 @@ public class User {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+	public Set<Notification> getNotifications() { return this.notifications; }
 
 
 	@Override

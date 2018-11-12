@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.time.LocalDateTime;
@@ -150,7 +149,7 @@ public class Spotted {
 			return false;
 		}
 		Spotted spotted = (Spotted) o;
-		return visible == spotted.visible && Objects.equals(id, spotted.id) && Objects.equals(location, spotted.location) && Objects.equals(course, spotted.course) && Objects.equals(text, spotted.text) && Objects.equals(image, spotted.image) && Objects.equals(comments, spotted.comments) && Objects.equals(datetime, spotted.datetime);
+		return Objects.equals(id, spotted.id) && Objects.equals(location, spotted.location) && Objects.equals(course, spotted.course) && Objects.equals(text, spotted.text) && Objects.equals(image, spotted.image) && Objects.equals(comments, spotted.comments) && Objects.equals(datetime, spotted.datetime);
 	}
 	
 	@Override
