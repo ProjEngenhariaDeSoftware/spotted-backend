@@ -16,5 +16,7 @@ public class NotificationService {
 		return this.notificatonRepository.save(notification);
 	}
 	
-	
+	public void delete(Long id) {
+		this.notificatonRepository.deleteById(id);
+	}
 }
