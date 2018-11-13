@@ -64,12 +64,12 @@ public class Post {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Set<Comment> comments;
 	
-	@Column(name = "start")
+	@Column(name = "start_date")
 	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDateTime startDate;
 	
-	@Column(name = "end")
+	@Column(name = "end_date")
 	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDateTime endDate;
