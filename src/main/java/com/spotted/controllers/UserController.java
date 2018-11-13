@@ -57,4 +57,9 @@ public class UserController {
 	public User notify(@PathVariable String email) throws Exception {
 		return this.userService.get(email);
 	}
+
+//	@RequestMapping(value = "/user/{email}/notify", method = RequestMethod.GET)
+//	public User viewNotification(@PathVariable String email) throws Exception {
+//		return this.userService.viewNotification(email);
+//	}
 }
