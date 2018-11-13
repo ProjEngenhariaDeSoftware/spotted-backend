@@ -33,6 +33,16 @@ public class SpottedController {
 		return this.spottedService.getAll();
 	}
 
+	@RequestMapping(value = "/spotted/visible", method = RequestMethod.GET)
+	public List<Spotted> getVisible() {
+		return this.spottedService.getVisible();
+	}
+
+	@RequestMapping(value = "/spotted/visible", method = RequestMethod.GET)
+	public List<Spotted> getHidden() {
+		return this.spottedService.getHidden();
+	}
+
 	@RequestMapping(value = "/spotted/{id}", method = RequestMethod.GET)
 	public Spotted get(@PathVariable Long id) throws Exception {
 		return this.spottedService.get(id);
