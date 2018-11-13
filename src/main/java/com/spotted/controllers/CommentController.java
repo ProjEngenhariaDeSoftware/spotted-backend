@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "api/")
+@RequestMapping(value = "/api")
 @CrossOrigin(value = "*")
 public class CommentController {
 	

@@ -36,8 +36,7 @@ public class UserController {
 	public User update(@RequestBody User user) {
 		return this.userService.update(user);
 	}
-	
-	
+
 	@RequestMapping(value = "/user/username/{username}", method = RequestMethod.GET)
 	public List<User> findUserByUsername(@PathVariable String username) {
 		return this.userService.findUserByUsername(username);
@@ -58,8 +57,4 @@ public class UserController {
 		return this.userService.get(email);
 	}
 
-//	@RequestMapping(value = "/user/{email}/notify", method = RequestMethod.GET)
-//	public User viewNotification(@PathVariable String email) throws Exception {
-//		return this.userService.viewNotification(email);
-//	}
 }
