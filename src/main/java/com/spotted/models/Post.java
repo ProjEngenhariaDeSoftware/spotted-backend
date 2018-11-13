@@ -1,7 +1,6 @@
 package com.spotted.models;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -16,7 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -39,10 +38,10 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@Column(name = "email")
-	@NotNull(message = "email can not be null")
-	@NotEmpty(message = "email can not be empty")
-	private String email;
+	@ManyToOne
+    @NotNull(message = "parente can not be null")
+	@JoinColumn(name = "parent_id", referencedColumnName = "email")
+    private User parent;
 	
 	@Column(name = "type")
 	@NotNull(message = "Type can not be null")
@@ -57,9 +56,8 @@ public class Post {
 	@Column(name = "text")
 	private String text;
 	
-	@Lob
-	@Column(name = "image")
-	private byte[] image;
+	@Column(name = "image", columnDefinition = "TEXT")
+	private String image;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "post_id", referencedColumnName = "id")
@@ -85,11 +83,10 @@ public class Post {
 	@Column(name = "visible")
 	private boolean visible = true;
 	
-	public Post() {}
-	
+	public Post() {}	
 
-	public Post(String email, String text, byte[] image, PostTypes type, String title) {
-		this.email = email;
+	public Post(User parent, String text, String image, PostTypes type, String title) {
+		this.parent = parent;
 		this.text = text;
 		this.image = image;
 		this.type = type;
@@ -103,15 +100,6 @@ public class Post {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public PostTypes getType() {
@@ -130,11 +118,11 @@ public class Post {
 		this.text = text;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
@@ -166,24 +154,56 @@ public class Post {
 		this.visible = visible;
 	}
 	
+	public User getParent() {
+		return parent;
+	}
+
+	public void setParent(User parent) {
+		this.parent = parent;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public LocalDateTime getStart() {
+		return start;
+	}
+
+	public void setStart(LocalDateTime start) {
+		this.start = start;
+	}
+
+	public LocalDateTime getEnd() {
+		return end;
+	}
+
+	public void setEnd(LocalDateTime end) {
+		this.end = end;
+	}
+
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
         return Objects.equals(id, post.id) &&
-                Objects.equals(email, post.email) &&
+                Objects.equals(parent, post.parent) &&
                 type == post.type &&
                 Objects.equals(text, post.text) &&
-                Arrays.equals(image, post.image) &&
+                image.equals(post.image) &&
                 Objects.equals(comments, post.comments) &&
                 Objects.equals(datetime, post.datetime);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, email, type, text, comments, datetime);
-        result = 31 * result + Arrays.hashCode(image);
+        int result = Objects.hash(id, parent, type, text, comments, datetime, image);
+        result = 31 * result;
         return result;
     }
 }
