@@ -2,5 +2,3 @@ language: "java"
 
 script:
         "mvn test"
-deploy:
-        default_text_charset: 'utf-16'

@@ -30,7 +30,7 @@ public class SpottedServiceTest {
     private SpottedService spottedService;
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
     private Spotted spotted;
 	private User user;
