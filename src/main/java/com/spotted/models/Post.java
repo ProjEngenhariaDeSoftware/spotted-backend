@@ -67,12 +67,12 @@ public class Post {
 	@Column(name = "start")
 	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-	private LocalDateTime start;
+	private LocalDateTime startDate;
 	
 	@Column(name = "end")
 	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-	private LocalDateTime end;
+	private LocalDateTime endDate;
 	
 	
 	@Column(name = "datetime")
@@ -170,20 +170,20 @@ public class Post {
 		this.title = title;
 	}
 
-	public LocalDateTime getStart() {
-		return start;
+	public LocalDateTime getStartDate() {
+		return startDate;
 	}
 
-	public void setStart(LocalDateTime start) {
-		this.start = start;
+	public void setStartDate(LocalDateTime startDate) {
+		this.startDate = startDate;
 	}
 
-	public LocalDateTime getEnd() {
-		return end;
+	public LocalDateTime getEndDate() {
+		return endDate;
 	}
 
-	public void setEnd(LocalDateTime end) {
-		this.end = end;
+	public void setEndDate(LocalDateTime endDate) {
+		this.endDate = endDate;
 	}
 
 	@Override
