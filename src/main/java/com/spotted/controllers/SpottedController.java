@@ -38,7 +38,7 @@ public class SpottedController {
 		return this.spottedService.getVisible();
 	}
 
-	@RequestMapping(value = "/spotted/visible", method = RequestMethod.GET)
+	@RequestMapping(value = "/spotted/hidden", method = RequestMethod.GET)
 	public List<Spotted> getHidden() {
 		return this.spottedService.getHidden();
 	}
