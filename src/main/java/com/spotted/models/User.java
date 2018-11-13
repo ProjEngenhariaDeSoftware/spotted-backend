@@ -29,7 +29,6 @@ public class User {
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@JoinColumn(name = "notification_id", referencedColumnName = "id")
 	@JsonManagedReference
 	private Set<Notification> notifications;
 
