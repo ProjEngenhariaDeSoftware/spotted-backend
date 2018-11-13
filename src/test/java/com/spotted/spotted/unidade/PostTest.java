@@ -24,7 +24,7 @@ public class PostTest {
 
     @Before
     public void setUp() {
-        this.post = new Post("email@test.com", "Texto de teste.", new byte[]{}, PostTypes.ENTERTAINMENT, "Titulo Teste");
+        this.post = new Post(new User("email@test.com", "user", "image"), "Texto de teste.", "", PostTypes.ENTERTAINMENT, "Titulo Teste");
     }
 
     /**
@@ -32,7 +32,7 @@ public class PostTest {
      */
     @Test
     public void testEquals() {
-        Post post = new Post("email@test.com", "Texto de teste.", new byte[]{}, PostTypes.ENTERTAINMENT, "Titulo Teste");
+        Post post = new Post(new User("email@test.com", "user", "image"), "Texto de teste.", "", PostTypes.ENTERTAINMENT, "Titulo Teste");
         Assert.assertEquals("Os posts deveriam ser iguais.", this.post, post);
     }
 
@@ -41,7 +41,7 @@ public class PostTest {
      */
     @Test
     public void testEqualsDifferentsTypes() {
-        Post post = new Post("email@test.com", "Texto de teste.", new byte[]{}, PostTypes.NOTICE, "Titulo Teste");
+        Post post = new Post(new User("email@test.com", "user", "image"), "Texto de teste.", "", PostTypes.NOTICE, "Titulo Teste");
         Assert.assertNotEquals("Os posts não deveriam ser iguais.", this.post, post);
     }
 

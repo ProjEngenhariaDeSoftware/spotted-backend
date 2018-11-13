@@ -1,12 +1,14 @@
 package com.spotted.services;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spotted.enums.PostTypes;
 import com.spotted.models.Comment;
 import com.spotted.models.Post;
 import com.spotted.repositories.PostRepository;
@@ -21,7 +23,7 @@ public class PostService {
 	CommentService commentService;
 	
 	public Post save(Post post) {
-		post.setDatetime(LocalDateTime.now());
+		post.setDatetime(LocalDateTime.now(ZoneId.of("America/Recife")));
 		return this.postRepository.save(post);
 	}
 	
@@ -92,5 +94,10 @@ public class PostService {
 		boolean visible = !post.isVisible();
 		post.setVisible(visible);
 		return this.postRepository.save(post);
+	}
+
+	public List<Post> postsByType(String type) {
+		PostTypes postType = PostTypes.valueOf(type);
+		return this.postRepository.postsByType(postType);
 	}
 }

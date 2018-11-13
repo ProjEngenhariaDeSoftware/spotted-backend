@@ -3,7 +3,6 @@ package com.spotted.controllers;
 import java.util.List;
 import java.util.Set;
 
-import com.spotted.enums.PostTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,13 +27,9 @@ public class PostController {
         return text == null || text.isEmpty();
     }
 
-    private boolean notImage(byte[] image) {
-        return image == null || image.length == 0;
-    }
-
     @RequestMapping(value = "/post", method = RequestMethod.POST)
     public Post save(@RequestBody Post post) throws Exception {
-        if (this.notText(post.getText()) && this.notImage(post.getImage())) {
+        if (this.notText(post.getText()) && this.notText(post.getImage())) {
             throw new Exception("Text and image can not be empty or null simultaneously'");
         }
         return this.postService.save(post);
@@ -43,6 +38,11 @@ public class PostController {
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     public List<Post> getAll() {
         return this.postService.getAll();
+    }
+    
+    @RequestMapping(value = "/post/type/{type}", method = RequestMethod.GET)
+    public List<Post> postsByType(@PathVariable String type) {
+        return this.postService.postsByType(type);
     }
 
 
