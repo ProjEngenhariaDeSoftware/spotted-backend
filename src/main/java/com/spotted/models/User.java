@@ -4,13 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -33,8 +27,9 @@ public class User {
 	@NotEmpty(message = "username can not be empty")
 	private String username;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "", fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@JoinColumn(name = "notification_id", referencedColumnName = "id")
 	@JsonManagedReference
 	private Set<Notification> notifications;
 
