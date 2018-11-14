@@ -1,5 +1,6 @@
 package com.spotted.models;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +17,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "comment")
@@ -43,6 +46,11 @@ public class Comment {
     
     @Column(name = "spotted_id")
     private Long spottedId;
+	
+	@Column(name = "datetime")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+	private LocalDateTime datetime;
 
     public Comment() {
     }
@@ -97,8 +105,14 @@ public class Comment {
 	public void addUserMentioned(String username) {
     	this.usersMentioned.add(username);
 	}
-
-
+	
+	public LocalDateTime getDatetime() {
+		return datetime;
+	}
+	
+	public void setDatetime(LocalDateTime datetime) {
+		this.datetime = datetime;
+	}
 	
 	@Override
     public boolean equals(Object o) {

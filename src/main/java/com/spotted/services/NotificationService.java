@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.spotted.models.Notification;
 import com.spotted.repositories.NotificationRepository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class NotificationService {
@@ -16,7 +17,9 @@ public class NotificationService {
 		return this.notificatonRepository.save(notification);
 	}
 	
-	public void delete(Long id) {
-		this.notificatonRepository.deleteById(id);
+	public Notification viewNotification(@PathVariable Long id) {
+		Notification notification = this.notificatonRepository.getOne(id);
+		notification.setVisualized(true);
+		return this.notificatonRepository.save(notification);
 	}
 }
