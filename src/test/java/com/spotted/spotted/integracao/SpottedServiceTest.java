@@ -275,6 +275,9 @@ public class SpottedServiceTest {
         }
     }
 
+    /**
+     * Testa o mudança de visibilidade de um spotted com id inválido.
+     */
     @Test
     public void testSetVisibleInvalidId() {
         try {
