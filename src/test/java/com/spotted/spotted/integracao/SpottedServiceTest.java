@@ -38,7 +38,7 @@ public class SpottedServiceTest {
  
 	@Before
     public void setUp() {
-		this.spotted = new Spotted("Teste 1", "teste", "teste", "" , true);
+		this.spotted = new Spotted("Teste 1", "teste", "teste", imgDefault , true);
 		this.user = new User("thiago.moura@ccc.ufcg.edu.br", "thiagomoura21", this.imgDefault);
         userService.save(user);
     }
@@ -198,5 +198,90 @@ public class SpottedServiceTest {
         spottedService.save(spotted2);
         Assert.assertTrue("Os spotted 1 deveria estar na lista", spottedService.getAll().contains(spotted1));
         Assert.assertTrue("Os spotted 2 deveria estar na lista", spottedService.getAll().contains(spotted2));
+    }
+
+    /**
+     * Testa se um spotted com visibilidade false não é retornado na listagem de spotteds visíveis.
+     */
+    @Test
+    public void testGetVisible() {
+        this.spotted.setVisible(false);
+        this.spottedService.save(this.spotted);
+        Assert.assertFalse("O spotted não deveria ser listado.", this.spottedService.getVisible().contains(this.spotted));
+    }
+
+    /**
+     * Testa se um spotted com visibilidade false é retornado na listagem de spotted escondidos.
+     */
+    @Test
+    public void testGetHidden() {
+        this.spotted.setVisible(false);
+        this.spottedService.save(this.spotted);
+        Assert.assertTrue("O spotted deveria ser listado.", this.spottedService.getHidden().contains(this.spotted));
+    }
+
+    /**
+     * Testa buscar um spotted por id.
+     */
+    @Test
+    public void testGet() {
+        Spotted spotted = this.spottedService.save(this.spotted);
+        try {
+            Assert.assertEquals("Os spotteds deveriam ser iguais.", spotted, this.spottedService.get(spotted.getId()));
+        } catch(Exception e) {
+            Assert.fail("Não deveria ter ocorrido falha.");
+        }
+    }
+
+    /**
+     * Testa buscar um spotted por id inválido.
+     */
+    @Test
+    public void testGetInvalidId() {
+        Spotted spotted = this.spottedService.save(this.spotted);
+        try {
+            Assert.assertEquals("Os spotteds deveriam ser iguais.", spotted, this.spottedService.get(-1L));
+            Assert.fail("Deveria ter ocorrido falha ao pesquisar um spotted com id não cadastrado.");
+        } catch(Exception e) {
+            Assert.assertEquals("As mensagens deveriam ser iguais", e.getMessage(), "This id is not registered in the system.");
+        }
+    }
+
+    /**
+     * Testa deletar um spotted.
+     */
+    @Test
+    public void testDelete() {
+        Spotted spotted = this.spottedService.save(this.spotted);
+        Assert.assertTrue("O spotted deveria estar na listagem.", this.spottedService.getAll().contains(spotted));
+        this.spottedService.delete(spotted.getId());
+        Assert.assertFalse("O spotted não deveria estar na listagem.", this.spottedService.getAll().contains(spotted));
+    }
+
+    /**
+     * Testa a alteração de visibilidade de um spotted.
+     */
+    @Test
+    public void testSetVisible() {
+        Spotted spotted = this.spottedService.save(this.spotted);
+        Assert.assertTrue("O spotted deveria ser listado nos visíveis.", this.spottedService.getVisible().contains(this.spotted));
+        Assert.assertFalse("O spotted não deveria ser listado nos escondidos.", this.spottedService.getHidden().contains(this.spotted));
+        try {
+            this.spottedService.setVisible(spotted.getId());
+            Assert.assertTrue("O spotted deveria ser lisatdo nos escondidos.", this.spottedService.getHidden().contains(spotted));
+            Assert.assertFalse("O spotted não deveria ser lisatdo nos visíveis.", this.spottedService.getVisible().contains(spotted));
+        } catch(Exception e) {
+            Assert.fail("Não deveria ter ocorrido falha ao mudar a visibilidade so spotted.");
+        }
+    }
+
+    @Test
+    public void testSetVisibleInvalidId() {
+        try {
+            this.spottedService.setVisible(-1L);
+            Assert.fail("Uma exceção deveria ter ocorrido ao mudar a visilidade de um spotted com id inválido.");
+        } catch (Exception e) {
+            Assert.assertEquals("As mensagens deveriam ser iguais.", e.getMessage(), "This id is not registered in the system.");
+        }
     }
 }

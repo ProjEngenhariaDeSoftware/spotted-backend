@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -146,6 +145,7 @@ public class Spotted {
 			return true;
 		}
 		if (o == null || getClass() != o.getClass()) {
+			System.err.println(o.getClass());
 			return false;
 		}
 		Spotted spotted = (Spotted) o;

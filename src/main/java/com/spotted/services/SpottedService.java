@@ -40,7 +40,7 @@ public class SpottedService {
 		if (!this.spottedRepository.existsById(id)) {
 			throw new Exception("This id is not registered in the system.");
 		}
-		return this.spottedRepository.getOne(id);
+		return this.spottedRepository.findById(id).get();
 	}
 
 	public Spotted addComment(Long id, Comment comment) throws Exception {
