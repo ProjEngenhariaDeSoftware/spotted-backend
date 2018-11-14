@@ -37,6 +37,9 @@ public class Notification {
 	@JoinColumn(name = "commenter_id", referencedColumnName = "email")
 	private User commenter;
 	
+	@Column(name = "visualized")
+	private boolean visualized = false;
+	
 	public Notification() {
 	}
 
@@ -66,6 +69,7 @@ public class Notification {
 		return publicationType;
 	}
 
+	
 	public void setPublicationType(String publicationType) {
 		this.publicationType = publicationType;
 	}
@@ -76,6 +80,14 @@ public class Notification {
 
 	public void setPublicationId(Long publicationId) {
 		this.publicationId = publicationId;
+	}
+	
+	public boolean isVisualized() {
+		return visualized;
+	}
+	
+	public void setVisualized(boolean visualized) {
+		this.visualized = visualized;
 	}
 	
 	@Override
