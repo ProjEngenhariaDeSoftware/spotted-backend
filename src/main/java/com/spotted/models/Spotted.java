@@ -148,7 +148,6 @@ public class Spotted {
 			System.err.println(o.getClass());
 			return false;
 		}
-		Spotted spotted = (Spotted) o;
 		return Objects.equals(id, spotted.id) && Objects.equals(location, spotted.location) && Objects.equals(course, spotted.course) && Objects.equals(text, spotted.text) && Objects.equals(image, spotted.image) && Objects.equals(comments, spotted.comments) && Objects.equals(datetime, spotted.datetime);
 	}
 	
