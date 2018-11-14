@@ -19,7 +19,7 @@ public class NotificationService {
 	
 	public Notification viewNotification(@PathVariable Long id) {
 		Notification notification = this.notificatonRepository.getOne(id);
-		notification.setVisualized(!notification.isVisualized());
+		notification.setVisualized(true);
 		return this.notificatonRepository.save(notification);
 	}
 }

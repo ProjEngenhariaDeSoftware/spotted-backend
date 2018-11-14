@@ -1,5 +1,6 @@
 package com.spotted.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ public class CommentService {
     CommentRepository commentRepository;
 
     public Comment save(Comment comment) {
+		comment.setDatetime(LocalDateTime.now());
         return this.commentRepository.save(comment);
     }
 
@@ -31,6 +33,10 @@ public class CommentService {
     
     public void delete(Long id) {
     	this.commentRepository.deleteById(id);
+	}
+	
+	public Comment edit(Comment comment) {
+		return this.commentRepository.save(comment);
 	}
 }
 
