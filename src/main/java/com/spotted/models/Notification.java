@@ -95,6 +95,15 @@ public class Notification {
 		this.visualized = visualized;
 	}
 	
+	public String getMarkedEmail() {
+		return markedEmail;
+	}
+
+	public void setMarkedEmail(String markedEmail) {
+		this.markedEmail = markedEmail;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
