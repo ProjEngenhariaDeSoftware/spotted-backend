@@ -40,7 +40,7 @@ public class Notification {
 	@Column(name = "marked_email")
 	@NotNull(message = "Marked email can not be null")
 	@NotEmpty(message = "Marked email can not be empty")
-	private String markerEmail;
+	private String markedEmail;
 	
 	@Column(name = "visualized")
 	private boolean visualized = false;
