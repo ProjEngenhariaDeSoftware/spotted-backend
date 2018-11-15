@@ -29,8 +29,8 @@ public class NotificationService {
 		return this.notificationRepository.save(notification);
 	}
 	
-	public Notification notify(String email, Notification notification) throws Exception {
-		if(!this.userRepository.existsById(email)) {
+	public Notification notify(Notification notification) throws Exception {
+		if(!this.userRepository.existsById(notification.getMarkedEmail())) {
 			throw new Exception("There is not a user registered with this id in the system");
 		}
 		return this.save(notification);
