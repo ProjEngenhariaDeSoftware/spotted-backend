@@ -1,13 +1,13 @@
 package com.spotted.spotted.unidade;
 
-import com.spotted.models.Notification;
-import com.spotted.models.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.spotted.models.User;
 
 /**
  * Testes de unidade para {@link User}
@@ -48,17 +48,5 @@ public class UserTest {
     public void testEqualsDifferentEmails() {
         User user = new User("testando@ccc", "teste", "");
         Assert.assertFalse("Os usuários não deveriam ser iguais.", user.equals(this.user));
-    }
-
-    /**
-     * Testa a adição de uma notificação em um usuário.
-     */
-    @Test
-    public void testAddNotification() {
-        User user = new User("testando@ccc", "test", "abc");
-        Notification notification = new Notification("NEWS", 1L, user);
-        this.user.addNotification(notification);
-        Assert.assertFalse("O conjunto não deveria ser vazio", this.user.getNotifications().isEmpty());
-        Assert.assertTrue("A notificação deveria ter sido inserida.", this.user.getNotifications().contains(notification));
     }
 }

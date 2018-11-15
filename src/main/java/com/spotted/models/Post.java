@@ -39,9 +39,9 @@ public class Post {
     private Long id;
 	
 	@ManyToOne
-    @NotNull(message = "parente can not be null")
-	@JoinColumn(name = "parent_id", referencedColumnName = "email")
-    private User parent;
+    @NotNull(message = "user can not be null")
+	@JoinColumn(name = "user_id", referencedColumnName = "email")
+    private User user;
 	
 	@Column(name = "type")
 	@NotNull(message = "Type can not be null")
@@ -85,8 +85,8 @@ public class Post {
 	
 	public Post() {}	
 
-	public Post(User parent, String text, String image, PostTypes type, String title) {
-		this.parent = parent;
+	public Post(User user, String text, String image, PostTypes type, String title) {
+		this.user = user;
 		this.text = text;
 		this.image = image;
 		this.type = type;
@@ -154,12 +154,12 @@ public class Post {
 		this.visible = visible;
 	}
 	
-	public User getParent() {
-		return parent;
+	public User getUser() {
+		return user;
 	}
 
-	public void setParent(User parent) {
-		this.parent = parent;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getTitle() {
@@ -192,7 +192,7 @@ public class Post {
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
         return Objects.equals(id, post.id) &&
-                Objects.equals(parent, post.parent) &&
+                Objects.equals(user, post.user) &&
                 type == post.type &&
                 Objects.equals(text, post.text) &&
                 image.equals(post.image) &&
@@ -202,7 +202,7 @@ public class Post {
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, parent, type, text, comments, datetime, image);
+        int result = Objects.hash(id, user, type, text, comments, datetime, image);
         result = 31 * result;
         return result;
     }

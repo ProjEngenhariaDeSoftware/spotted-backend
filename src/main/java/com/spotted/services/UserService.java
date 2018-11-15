@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spotted.models.Notification;
 import com.spotted.models.User;
 import com.spotted.repositories.UserRepository;
 
@@ -49,15 +48,5 @@ public class UserService {
 		find.setUsername(user.getUsername());
 		this.save(find);
 		return find;
-	}
-
-	public User notify(String id, Notification notification) throws Exception {
-		if(!this.userRepository.existsById(id)) {
-			throw new Exception("There is not a user registered with this id in the system");
-		}
-		this.notificationService.save(notification);
-		User user = this.userRepository.getOne(id);
-		user.addNotification(notification);
-		return this.userRepository.save(user);
 	}
 }
