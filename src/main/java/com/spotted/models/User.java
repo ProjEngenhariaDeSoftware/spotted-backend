@@ -1,22 +1,15 @@
 package com.spotted.models;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "customer")
@@ -33,12 +26,6 @@ public class User {
 	@NotEmpty(message = "username can not be empty")
 	private String username;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@JsonManagedReference
-	private Set<Notification> notifications;
-
-	
 	@Column(name = "image", columnDefinition = "TEXT")
 	@NotNull(message = "image can not be null")
 	@NotEmpty(message = "image can not be empty")
@@ -50,7 +37,6 @@ public class User {
 		this.email = email;
 		this.username = username;
 		this.image = image;
-		this.notifications = new HashSet<>();
 	}
 	
 	public String getUsername() {
@@ -69,10 +55,6 @@ public class User {
 		this.email = email;
 	}
 	
-	public void addNotification(Notification notification) {
-		this.notifications.add(notification);
-	}
-	
 	public String getImage() {
 		return image;
 	}
@@ -80,9 +62,6 @@ public class User {
 	public void setImage(String image) {
 		this.image = image;
 	}
-
-	public Set<Notification> getNotifications() { return this.notifications; }
-
 
 	@Override
 	public boolean equals(Object o) {
