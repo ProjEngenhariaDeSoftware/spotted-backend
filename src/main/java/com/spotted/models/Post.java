@@ -31,7 +31,7 @@ import com.spotted.enums.PostTypes;
 @Entity
 @Table(name = "post")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Post {
+public class Post implements Comparable<Post>{
 	
 	@Id
     @Column(name = "id")
@@ -206,4 +206,9 @@ public class Post {
         result = 31 * result;
         return result;
     }
+	
+	@Override
+	public int compareTo(Post o) {
+		return o.getDatetime().compareTo(this.getDatetime());
+	}
 }

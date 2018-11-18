@@ -2,6 +2,8 @@ package com.spotted.services;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -28,7 +30,9 @@ public class PostService {
 	}
 	
 	public List<Post> getAll() {
-		return this.postRepository.findAll();
+		List<Post> posts = this.postRepository.findAll();
+		Collections.sort(posts);
+		return posts;
 	}
 
 	public List<Post> searchByEmail(String email) {
