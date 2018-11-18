@@ -1,5 +1,7 @@
 package com.spotted.services;
 
+import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ public class NotificationService {
 	UserRepository userRepository;
 	
 	public Notification save(Notification notification) {
+		notification.setDatetime(LocalDateTime.now());
 		return this.notificationRepository.save(notification);
 	}
 	
@@ -37,6 +40,8 @@ public class NotificationService {
 	}
 
 	public List<Notification> findByEmail(String email) {
-		return this.notificationRepository.findByEmail(email);
+		List<Notification> notifications = this.notificationRepository.findByEmail(email);
+		Collections.sort(notifications);
+		return notifications;
 	}
 }
