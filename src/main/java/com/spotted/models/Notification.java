@@ -153,6 +153,6 @@ public class Notification implements Comparable<Notification> {
 	
 	@Override
 	public int compareTo(Notification o) {
-		return this.getDatetime().compareTo(o.datetime);
+		return o.datetime.compareTo(this.getDatetime());
 	}
 }
