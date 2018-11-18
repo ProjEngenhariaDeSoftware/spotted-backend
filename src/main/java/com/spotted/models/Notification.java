@@ -11,23 +11,27 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "notification")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Notification {
+public class Notification implements Comparable<Notification> {
 	
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
+	
 	@Column(name = "publication_type")
 	@NotNull(message = "Publication type can not be null")
 	@NotEmpty(message = "Publication type can not be empty")
 	private String publicationType;
-
+	
 	@Column(name = "publication_id")
 	@NotNull(message = "Publication id can not be null")
 	private Long publicationId;
@@ -45,9 +49,14 @@ public class Notification {
 	@Column(name = "visualized")
 	private boolean visualized = false;
 	
+	@Column(name = "datetime")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+	private LocalDateTime datetime;
+	
 	public Notification() {
 	}
-
+	
 	public Notification(String publicationType, Long publicationId, User commenter) {
 		this.publicationType = publicationType;
 		this.publicationId = publicationId;
@@ -57,7 +66,7 @@ public class Notification {
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -73,16 +82,16 @@ public class Notification {
 	public String getPublicationType() {
 		return publicationType;
 	}
-
+	
 	
 	public void setPublicationType(String publicationType) {
 		this.publicationType = publicationType;
 	}
-
+	
 	public Long getPublicationId() {
 		return publicationId;
 	}
-
+	
 	public void setPublicationId(Long publicationId) {
 		this.publicationId = publicationId;
 	}
@@ -98,11 +107,18 @@ public class Notification {
 	public String getMarkedEmail() {
 		return markedEmail;
 	}
-
+	
 	public void setMarkedEmail(String markedEmail) {
 		this.markedEmail = markedEmail;
 	}
-
+	
+	public LocalDateTime getDatetime() {
+		return datetime;
+	}
+	
+	public void setDatetime(LocalDateTime datetime) {
+		this.datetime = datetime;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -111,21 +127,32 @@ public class Notification {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Notification other = (Notification) obj;
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		}
+		else if (!id.equals(other.id)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public int compareTo(Notification o) {
+		return this.getDatetime().compareTo(o.datetime);
 	}
 }
