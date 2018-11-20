@@ -59,6 +59,9 @@ public class Spotted {
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDateTime datetime;
 	
+	@Column(name = "number_of_complaints")
+	private int numberOfComplaints;
+	
 	public Spotted() {
 	}
 	
@@ -139,6 +142,14 @@ public class Spotted {
 		this.datetime = datetime;
 	}
 	
+	public int getNumberOfComplaints() {
+		return numberOfComplaints;
+	}
+
+	public void setNumberOfComplaints(int numberOfComplaints) {
+		this.numberOfComplaints = numberOfComplaints;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

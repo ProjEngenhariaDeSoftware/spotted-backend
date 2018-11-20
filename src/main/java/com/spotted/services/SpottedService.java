@@ -67,8 +67,11 @@ public class SpottedService {
 		}
 		Spotted spotted;
 		spotted = this.spottedRepository.getOne(id);
-		boolean visible = !spotted.getVisible();
-		spotted.setVisible(visible);
+		spotted.setNumberOfComplaints(spotted.getNumberOfComplaints() + 1);
+		if (spotted.getNumberOfComplaints() == 5) {
+			boolean visible = !spotted.getVisible();
+			spotted.setVisible(visible);
+		}
 		return this.spottedRepository.save(spotted);
 	}
 	
