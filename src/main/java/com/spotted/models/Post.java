@@ -69,6 +69,9 @@ public class Post implements Comparable<Post>{
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDateTime startDate;
 	
+	@Column(name = "post_flag")
+	private String postFlag;
+
 	@Column(name = "end_date")
 	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
@@ -184,6 +187,14 @@ public class Post implements Comparable<Post>{
 
 	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
+	}
+	
+	public String getPostFlag() {
+		return postFlag;
+	}
+
+	public void setPostFlag(String postFlag) {
+		this.postFlag = postFlag;
 	}
 
 	@Override
