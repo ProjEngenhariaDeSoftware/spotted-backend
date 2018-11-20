@@ -1,6 +1,7 @@
 package com.spotted.services;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class CommentService {
     CommentRepository commentRepository;
 
     public Comment save(Comment comment) {
-		comment.setDatetime(LocalDateTime.now());
+		comment.setDatetime(LocalDateTime.now(ZoneId.of("America/Recife")));
         return this.commentRepository.save(comment);
     }
 

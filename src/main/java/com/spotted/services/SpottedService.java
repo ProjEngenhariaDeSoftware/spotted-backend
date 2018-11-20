@@ -1,6 +1,7 @@
 package com.spotted.services;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class SpottedService {
 	CommentService commentService;
 
 	public Spotted save(Spotted spotted) {
-		spotted.setDatetime(LocalDateTime.now());
+		spotted.setDatetime(LocalDateTime.now(ZoneId.of("America/Recife")));
 		return this.spottedRepository.save(spotted);
 	}
 
