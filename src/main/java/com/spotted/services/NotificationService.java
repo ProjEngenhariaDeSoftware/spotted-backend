@@ -1,6 +1,7 @@
 package com.spotted.services;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class NotificationService {
 		for (int i = 0; i < markedEmails.size(); i++) {
 			String email = this.userRepository.getEmail(markedEmails.get(i));
 			Notification notification = new Notification(publicationType, publicationId, commenter, email);
-			notification.setDatetime(LocalDateTime.now());
+			notification.setDatetime(LocalDateTime.now(ZoneId.of("America/Recife")));
 			System.out.print(this.notificationRepository.save(notification).getMarkedEmail());
 		}
 	}
