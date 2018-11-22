@@ -25,11 +25,6 @@ public class NotificationController {
     public Notification viewNotification(@PathVariable Long id) {
         return this.notificationService.viewNotification(id);
     }
-    
-    @RequestMapping(value = "/notification", method = RequestMethod.POST)
-	public Notification notify(@RequestBody Notification notification) throws Exception {
-		return this.notificationService.notify(notification);
-	}
 	
 	@RequestMapping(value = "/notification/{email}", method = RequestMethod.GET)
 	public List<Notification> findByEmail(@PathVariable String email) {
