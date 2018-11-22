@@ -57,10 +57,11 @@ public class Notification implements Comparable<Notification> {
 	public Notification() {
 	}
 	
-	public Notification(String publicationType, Long publicationId, User commenter) {
+	public Notification(String publicationType, Long publicationId, User commenter, String markedEmail) {
 		this.publicationType = publicationType;
 		this.publicationId = publicationId;
 		this.commenter = commenter;
+		this.markedEmail = markedEmail;
 	}
 	
 	public Long getId() {
