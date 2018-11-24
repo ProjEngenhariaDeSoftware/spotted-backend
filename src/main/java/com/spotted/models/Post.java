@@ -77,7 +77,6 @@ public class Post implements Comparable<Post>{
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDateTime endDate;
 	
-	
 	@Column(name = "datetime")
 	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
@@ -85,6 +84,9 @@ public class Post implements Comparable<Post>{
 	
 	@Column(name = "visible")
 	private boolean visible = true;
+	
+	@Column(name = "number_of_complaints")
+	private int numberOfComplaints;
 	
 	public Post() {}	
 
@@ -192,11 +194,19 @@ public class Post implements Comparable<Post>{
 	public String getPostFlag() {
 		return postFlag;
 	}
-
+	
+	public int getNumberOfComplaints() {
+		return numberOfComplaints;
+	}
+	
+	public void setNumberOfComplaints(int numberOfComplaints) {
+		this.numberOfComplaints = numberOfComplaints;
+	}
+	
 	public void setPostFlag(String postFlag) {
 		this.postFlag = postFlag;
 	}
-
+	
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
