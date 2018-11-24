@@ -34,6 +34,14 @@ public class PostService {
 		Collections.sort(posts);
 		return posts;
 	}
+	
+	public List<Post> getVisible(){
+		return this.postRepository.findVisible();
+	}
+	
+	public List<Post> getHidden(){
+		return this.postRepository.findHidden();
+	}
 
 	public List<Post> searchByEmail(String email) {
 		return this.postRepository.postsByEmail(email);

@@ -39,6 +39,15 @@ public class PostController {
     public List<Post> getAll() {
         return this.postService.getAll();
     }
+	@RequestMapping(value = "/post/visible", method = RequestMethod.GET)
+	public List<Post> getVisible() {
+		return this.postService.getVisible();
+	}
+	
+	@RequestMapping(value = "/post/hidden", method = RequestMethod.GET)
+	public List<Post> getHidden() {
+		return this.postService.getHidden();
+	}
     
     @RequestMapping(value = "/post/type/{type}", method = RequestMethod.GET)
     public List<Post> postsByType(@PathVariable String type) {
