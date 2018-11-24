@@ -21,5 +21,10 @@ public interface PostRepository extends JpaRepository<Post, Long>  {
 	
 	@Query("select p from Post p where p.type = ?1")
 	List<Post> postsByType(PostTypes postType);
-
+	
+	@Query("select p from Post p where p.visible = true")
+	List<Post> findVisible();
+	
+	@Query("select p from Post p where p.visible = false")
+	List<Post> findHidden();
 }
