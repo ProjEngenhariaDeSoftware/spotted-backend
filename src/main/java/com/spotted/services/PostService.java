@@ -101,10 +101,13 @@ public class PostService {
 		if (!this.postRepository.existsById(id)) {
 			throw new Exception("This id is not registered in the system.");
 		}
-		
-		Post post = this.postRepository.getOne(id);
-		boolean visible = !post.isVisible();
-		post.setVisible(visible);
+		Post post;
+		post = this.postRepository.getOne(id);
+		post.setNumberOfComplaints(post.getNumberOfComplaints() + 1);
+		if (post.getNumberOfComplaints() == 5) {
+			boolean visible = !post.isVisible();
+			post.setVisible(visible);
+		}
 		return this.postRepository.save(post);
 	}
 
