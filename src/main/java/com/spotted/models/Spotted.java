@@ -38,7 +38,7 @@ public class Spotted {
 	@Column(name = "course")
 	private String course;
 	
-	@Column(name = "text")
+	@Column(name = "text", columnDefinition = "TEXT")
 	@NotNull(message = "Spotted text can not be null")
 	@NotEmpty(message = "Spotted text can not be empty")
 	private String text;
