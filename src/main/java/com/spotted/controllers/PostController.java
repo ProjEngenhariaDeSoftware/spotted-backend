@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spotted.models.Comment;
 import com.spotted.models.Post;
+import com.spotted.services.NotificationService;
 import com.spotted.services.PostService;
 
 @RestController
@@ -22,6 +23,9 @@ public class PostController {
 
     @Autowired
     PostService postService;
+    
+    @Autowired
+	NotificationService notificationService;
 
     private boolean notText(String text) {
         return text == null || text.isEmpty();
@@ -72,7 +76,8 @@ public class PostController {
     
     @RequestMapping(value = "/post/{id}/comment", method = RequestMethod.PUT)
 	public Comment addComment(@PathVariable Long id, @RequestBody Comment comment) throws Exception {
-		return this.postService.addComment(id, comment);
+    	this.notificationService.save("post", id, comment.getCommenter(), comment.getUsersMentioned());
+  		return this.postService.addComment(id, comment);
 	}
 
 	@RequestMapping(value = "/post/{id}/comment", method = RequestMethod.GET)

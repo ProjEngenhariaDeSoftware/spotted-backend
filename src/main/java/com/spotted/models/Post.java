@@ -53,7 +53,7 @@ public class Post implements Comparable<Post>{
 	@NotEmpty(message = "title can not be empty")
 	private String title;
 	
-	@Column(name = "text")
+	@Column(name = "text", columnDefinition = "TEXT")
 	private String text;
 	
 	@Column(name = "image", columnDefinition = "TEXT")
