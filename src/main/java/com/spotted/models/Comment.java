@@ -34,7 +34,7 @@ public class Comment {
     @ElementCollection
     private List<String> usersMentioned;
 
-    @Column(name = "comment")
+    @Column(name = "comment", columnDefinition = "TEXT")
     @NotNull(message = "Comment can not be null")
     @NotEmpty(message = "Comment can not be empty")
     private String comment;
