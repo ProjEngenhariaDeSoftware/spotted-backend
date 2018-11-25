@@ -71,7 +71,7 @@ public class PostController {
     }
     
     @RequestMapping(value = "/post/{id}/comment", method = RequestMethod.PUT)
-	public Post addComment(@PathVariable Long id, @RequestBody Comment comment) throws Exception {
+	public Comment addComment(@PathVariable Long id, @RequestBody Comment comment) throws Exception {
 		return this.postService.addComment(id, comment);
 	}
 
