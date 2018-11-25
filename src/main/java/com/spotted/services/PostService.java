@@ -57,7 +57,7 @@ public class PostService {
 		return deleted;
 	}
 	
-	public Post addComment(Long id, Comment comment) throws Exception {
+	public Comment addComment(Long id, Comment comment) throws Exception {
 		if (!this.postRepository.existsById(id)) {
 			throw new Exception("There is not a post registered with this id in the system");
 		}
@@ -65,7 +65,7 @@ public class PostService {
 		Post post = this.postRepository.getOne(id);
 		post.addComment(comment);
 		this.postRepository.save(post);
-		return post;
+		return comment;
 	}
 	
 	public Set<Comment> getComments(Long id) {
