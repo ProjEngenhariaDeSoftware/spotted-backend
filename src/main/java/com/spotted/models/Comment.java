@@ -44,7 +44,7 @@ public class Comment {
 	@JoinColumn(name = "commenter_id", referencedColumnName = "email")
     private User commenter;
     
-    @Column(name = "spotted_id")
+    @Column(name = "publication_id")
     private Long spottedId;
 	
 	@Column(name = "datetime")
