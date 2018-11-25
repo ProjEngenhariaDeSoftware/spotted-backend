@@ -187,23 +187,23 @@ public class PostServiceTest {
         }
     }
 
-    /**
-     * Testa a adição de um comentário em um post inexistente.
-     */
-    @Test
-    public void testAddCommentPostNonexistent() {
-        this.postService.save(this.post);
-        this.userService.save(this.user);
-        Comment comment = new Comment(new ArrayList<>(), "Comentário de teste.", this.user, null);
-        Long id = Long.valueOf(-1);
-        try {
-            Post post = this.postService.addComment(id, comment);
-            Assert.fail("Deveria ter lançado uma exceção.");
-        } catch (Exception e) {
-            Assert.assertEquals("As mensagens deveriam ser igauis.",
-                    "There is not a post registered with this id in the system", e.getMessage());
-        }
-    }
+//    /**
+//     * Testa a adição de um comentário em um post inexistente.
+//     */
+//    @Test
+//    public void testAddCommentPostNonexistent() {
+//        this.postService.save(this.post);
+//        this.userService.save(this.user);
+//        Comment comment = new Comment(new ArrayList<>(), "Comentário de teste.", this.user, null);
+//        Long id = Long.valueOf(-1);
+//        try {
+//            Post post = this.postService.addComment(id, comment);
+//            Assert.fail("Deveria ter lançado uma exceção.");
+//        } catch (Exception e) {
+//            Assert.assertEquals("As mensagens deveriam ser igauis.",
+//                    "There is not a post registered with this id in the system", e.getMessage());
+//        }
+//    }
 
     /**
      * Testa
