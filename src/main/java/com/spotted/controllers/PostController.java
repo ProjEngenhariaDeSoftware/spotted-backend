@@ -75,9 +75,9 @@ public class PostController {
     }
     
     @RequestMapping(value = "/post/{id}/comment", method = RequestMethod.PUT)
-	public Post addComment(@PathVariable Long id, @RequestBody Comment comment) throws Exception {
+	public Comment addComment(@PathVariable Long id, @RequestBody Comment comment) throws Exception {
     	this.notificationService.save("post", id, comment.getCommenter(), comment.getUsersMentioned());
-		return this.postService.addComment(id, comment);
+  		return this.postService.addComment(id, comment);
 	}
 
 	@RequestMapping(value = "/post/{id}/comment", method = RequestMethod.GET)
