@@ -53,7 +53,7 @@ public class SpottedController {
 	}
 
 	@RequestMapping(value = "/spotted/{id}/comment", method = RequestMethod.PUT)
-	public Spotted addComment(@PathVariable Long id, @RequestBody Comment comment) throws Exception {
+	public Comment addComment(@PathVariable Long id, @RequestBody Comment comment) throws Exception {
 		this.notificationService.save("spotted", id, comment.getCommenter(), comment.getUsersMentioned());
 		return this.spottedService.addComment(id, comment);
 	}
