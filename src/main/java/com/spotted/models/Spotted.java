@@ -38,7 +38,7 @@ public class Spotted {
 	@Column(name = "course")
 	private String course;
 	
-	@Column(name = "text")
+	@Column(name = "text", columnDefinition = "TEXT")
 	@NotNull(message = "Spotted text can not be null")
 	@NotEmpty(message = "Spotted text can not be empty")
 	private String text;
@@ -58,6 +58,9 @@ public class Spotted {
 	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDateTime datetime;
+	
+	@Column(name = "number_of_complaints")
+	private int numberOfComplaints;
 	
 	public Spotted() {
 	}
@@ -139,6 +142,14 @@ public class Spotted {
 		this.datetime = datetime;
 	}
 	
+	public int getNumberOfComplaints() {
+		return numberOfComplaints;
+	}
+
+	public void setNumberOfComplaints(int numberOfComplaints) {
+		this.numberOfComplaints = numberOfComplaints;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

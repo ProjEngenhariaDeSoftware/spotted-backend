@@ -31,7 +31,7 @@ import com.spotted.enums.PostTypes;
 @Entity
 @Table(name = "post")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Post {
+public class Post implements Comparable<Post>{
 	
 	@Id
     @Column(name = "id")
@@ -39,9 +39,9 @@ public class Post {
     private Long id;
 	
 	@ManyToOne
-    @NotNull(message = "parente can not be null")
-	@JoinColumn(name = "parent_id", referencedColumnName = "email")
-    private User parent;
+    @NotNull(message = "user can not be null")
+	@JoinColumn(name = "user_id", referencedColumnName = "email")
+    private User user;
 	
 	@Column(name = "type")
 	@NotNull(message = "Type can not be null")
@@ -53,7 +53,7 @@ public class Post {
 	@NotEmpty(message = "title can not be empty")
 	private String title;
 	
-	@Column(name = "text")
+	@Column(name = "text", columnDefinition = "TEXT")
 	private String text;
 	
 	@Column(name = "image", columnDefinition = "TEXT")
@@ -69,11 +69,13 @@ public class Post {
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDateTime startDate;
 	
+	@Column(name = "post_flag")
+	private String postFlag;
+
 	@Column(name = "end_date")
 	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDateTime endDate;
-	
 	
 	@Column(name = "datetime")
 	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
@@ -83,10 +85,13 @@ public class Post {
 	@Column(name = "visible")
 	private boolean visible = true;
 	
+	@Column(name = "number_of_complaints")
+	private int numberOfComplaints;
+	
 	public Post() {}	
 
-	public Post(User parent, String text, String image, PostTypes type, String title) {
-		this.parent = parent;
+	public Post(User user, String text, String image, PostTypes type, String title) {
+		this.user = user;
 		this.text = text;
 		this.image = image;
 		this.type = type;
@@ -154,12 +159,12 @@ public class Post {
 		this.visible = visible;
 	}
 	
-	public User getParent() {
-		return parent;
+	public User getUser() {
+		return user;
 	}
 
-	public void setParent(User parent) {
-		this.parent = parent;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getTitle() {
@@ -185,14 +190,30 @@ public class Post {
 	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
-
+	
+	public String getPostFlag() {
+		return postFlag;
+	}
+	
+	public int getNumberOfComplaints() {
+		return numberOfComplaints;
+	}
+	
+	public void setNumberOfComplaints(int numberOfComplaints) {
+		this.numberOfComplaints = numberOfComplaints;
+	}
+	
+	public void setPostFlag(String postFlag) {
+		this.postFlag = postFlag;
+	}
+	
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
         return Objects.equals(id, post.id) &&
-                Objects.equals(parent, post.parent) &&
+                Objects.equals(user, post.user) &&
                 type == post.type &&
                 Objects.equals(text, post.text) &&
                 image.equals(post.image) &&
@@ -202,8 +223,13 @@ public class Post {
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, parent, type, text, comments, datetime, image);
+        int result = Objects.hash(id, user, type, text, comments, datetime, image);
         result = 31 * result;
         return result;
     }
+	
+	@Override
+	public int compareTo(Post o) {
+		return o.getDatetime().compareTo(this.getDatetime());
+	}
 }

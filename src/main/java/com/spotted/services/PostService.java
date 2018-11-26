@@ -2,6 +2,8 @@ package com.spotted.services;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -28,7 +30,17 @@ public class PostService {
 	}
 	
 	public List<Post> getAll() {
-		return this.postRepository.findAll();
+		List<Post> posts = this.postRepository.findAll();
+		Collections.sort(posts);
+		return posts;
+	}
+	
+	public List<Post> getVisible(){
+		return this.postRepository.findVisible();
+	}
+	
+	public List<Post> getHidden(){
+		return this.postRepository.findHidden();
 	}
 
 	public List<Post> searchByEmail(String email) {
@@ -45,7 +57,7 @@ public class PostService {
 		return deleted;
 	}
 	
-	public Post addComment(Long id, Comment comment) throws Exception {
+	public Comment addComment(Long id, Comment comment) throws Exception {
 		if (!this.postRepository.existsById(id)) {
 			throw new Exception("There is not a post registered with this id in the system");
 		}
@@ -53,7 +65,7 @@ public class PostService {
 		Post post = this.postRepository.getOne(id);
 		post.addComment(comment);
 		this.postRepository.save(post);
-		return post;
+		return comment;
 	}
 	
 	public Set<Comment> getComments(Long id) {
@@ -89,10 +101,13 @@ public class PostService {
 		if (!this.postRepository.existsById(id)) {
 			throw new Exception("This id is not registered in the system.");
 		}
-		
-		Post post = this.postRepository.getOne(id);
-		boolean visible = !post.isVisible();
-		post.setVisible(visible);
+		Post post;
+		post = this.postRepository.getOne(id);
+		post.setNumberOfComplaints(post.getNumberOfComplaints() + 1);
+		if (post.getNumberOfComplaints() == 5) {
+			boolean visible = !post.isVisible();
+			post.setVisible(visible);
+		}
 		return this.postRepository.save(post);
 	}
 

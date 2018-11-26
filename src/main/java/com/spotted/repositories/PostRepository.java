@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface PostRepository extends JpaRepository<Post, Long>  {
 	
 
-	@Query("select p from Post p where p.parent.email = ?1")
+	@Query("select p from Post p where p.user.email = ?1")
 	List<Post> postsByEmail(String email);
 	
 	@Query("select p from Post p where p.id = ?1")
@@ -21,5 +21,10 @@ public interface PostRepository extends JpaRepository<Post, Long>  {
 	
 	@Query("select p from Post p where p.type = ?1")
 	List<Post> postsByType(PostTypes postType);
-
+	
+	@Query("select p from Post p where p.visible = true")
+	List<Post> findVisible();
+	
+	@Query("select p from Post p where p.visible = false")
+	List<Post> findHidden();
 }

@@ -1,6 +1,7 @@
 package com.spotted.services;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class SpottedService {
 	CommentService commentService;
 
 	public Spotted save(Spotted spotted) {
-		spotted.setDatetime(LocalDateTime.now());
+		spotted.setDatetime(LocalDateTime.now(ZoneId.of("America/Recife")));
 		return this.spottedRepository.save(spotted);
 	}
 
@@ -36,6 +37,7 @@ public class SpottedService {
 	public List<Spotted> getHidden(){
 		return this.spottedRepository.findHidden();
 	}
+	
 	public Spotted get(Long id) throws Exception {
 		if (!this.spottedRepository.existsById(id)) {
 			throw new Exception("This id is not registered in the system.");
@@ -43,7 +45,7 @@ public class SpottedService {
 		return this.spottedRepository.findById(id).get();
 	}
 
-	public Spotted addComment(Long id, Comment comment) throws Exception {
+	public Comment addComment(Long id, Comment comment) throws Exception {
 		if (!this.spottedRepository.existsById(id)) {
 			throw new Exception("There is not a spotted registered with this id in the system");
 		}
@@ -52,7 +54,7 @@ public class SpottedService {
 		Spotted spotted = this.spottedRepository.getOne(id);
 		spotted.addComment(comment);
 		this.spottedRepository.save(spotted);
-		return spotted;
+		return comment;
 	}
 
 	public Set<Comment> getComments(Long id) {
@@ -66,8 +68,11 @@ public class SpottedService {
 		}
 		Spotted spotted;
 		spotted = this.spottedRepository.getOne(id);
-		boolean visible = !spotted.getVisible();
-		spotted.setVisible(visible);
+		spotted.setNumberOfComplaints(spotted.getNumberOfComplaints() + 1);
+		if (spotted.getNumberOfComplaints() == 5) {
+			boolean visible = !spotted.getVisible();
+			spotted.setVisible(visible);
+		}
 		return this.spottedRepository.save(spotted);
 	}
 	

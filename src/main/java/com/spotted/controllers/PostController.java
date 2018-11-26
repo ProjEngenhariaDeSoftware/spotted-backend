@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spotted.models.Comment;
 import com.spotted.models.Post;
+import com.spotted.services.NotificationService;
 import com.spotted.services.PostService;
 
 @RestController
@@ -22,6 +23,9 @@ public class PostController {
 
     @Autowired
     PostService postService;
+    
+    @Autowired
+	NotificationService notificationService;
 
     private boolean notText(String text) {
         return text == null || text.isEmpty();
@@ -39,6 +43,15 @@ public class PostController {
     public List<Post> getAll() {
         return this.postService.getAll();
     }
+	@RequestMapping(value = "/post/visible", method = RequestMethod.GET)
+	public List<Post> getVisible() {
+		return this.postService.getVisible();
+	}
+	
+	@RequestMapping(value = "/post/hidden", method = RequestMethod.GET)
+	public List<Post> getHidden() {
+		return this.postService.getHidden();
+	}
     
     @RequestMapping(value = "/post/type/{type}", method = RequestMethod.GET)
     public List<Post> postsByType(@PathVariable String type) {
@@ -62,8 +75,9 @@ public class PostController {
     }
     
     @RequestMapping(value = "/post/{id}/comment", method = RequestMethod.PUT)
-	public Post addComment(@PathVariable Long id, @RequestBody Comment comment) throws Exception {
-		return this.postService.addComment(id, comment);
+	public Comment addComment(@PathVariable Long id, @RequestBody Comment comment) throws Exception {
+    	this.notificationService.save("post", id, comment.getCommenter(), comment.getUsersMentioned());
+  		return this.postService.addComment(id, comment);
 	}
 
 	@RequestMapping(value = "/post/{id}/comment", method = RequestMethod.GET)
