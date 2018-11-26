@@ -267,8 +267,10 @@ public class SpottedServiceTest {
         Assert.assertTrue("O spotted deveria ser listado nos visíveis.", this.spottedService.getVisible().contains(this.spotted));
         Assert.assertFalse("O spotted não deveria ser listado nos escondidos.", this.spottedService.getHidden().contains(this.spotted));
         try {
-            this.spottedService.setVisible(spotted.getId());
-            Assert.assertTrue("O spotted deveria ser lisatdo nos escondidos.", this.spottedService.getHidden().contains(spotted));
+            for (int i = 0; i < 5; i++) {
+	    	this.spottedService.setVisible(spotted.getId());
+	    } 
+	    Assert.assertTrue("O spotted deveria ser listado nos escondidos.", this.spottedService.getHidden().contains(spotted));
             Assert.assertFalse("O spotted não deveria ser lisatdo nos visíveis.", this.spottedService.getVisible().contains(spotted));
         } catch(Exception e) {
             Assert.fail("Não deveria ter ocorrido falha ao mudar a visibilidade so spotted.");
