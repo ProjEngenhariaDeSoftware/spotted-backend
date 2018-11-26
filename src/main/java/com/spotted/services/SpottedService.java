@@ -45,7 +45,7 @@ public class SpottedService {
 		return this.spottedRepository.findById(id).get();
 	}
 
-	public Spotted addComment(Long id, Comment comment) throws Exception {
+	public Comment addComment(Long id, Comment comment) throws Exception {
 		if (!this.spottedRepository.existsById(id)) {
 			throw new Exception("There is not a spotted registered with this id in the system");
 		}
@@ -54,7 +54,7 @@ public class SpottedService {
 		Spotted spotted = this.spottedRepository.getOne(id);
 		spotted.addComment(comment);
 		this.spottedRepository.save(spotted);
-		return spotted;
+		return comment;
 	}
 
 	public Set<Comment> getComments(Long id) {
