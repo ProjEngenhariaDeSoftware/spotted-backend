@@ -82,4 +82,10 @@ public class SpottedTest {
         Assert.assertFalse("O spotted não deveria estar visível.", this.spotted.getVisible());
     }
 
+    @Test
+    public void testSetNumberOfComplaints() {
+        this.spotted.setNumberOfComplaints(5);
+        Assert.assertEquals("A quantidade de complaints deveria ter sido alterada.", this.spotted.getNumberOfComplaints(), 5);
+    }
+
 }

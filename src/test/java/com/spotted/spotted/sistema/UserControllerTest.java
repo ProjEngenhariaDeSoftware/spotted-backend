@@ -46,4 +46,14 @@ public class UserControllerTest {
         ResponseEntity<List> usersAfter = template.getForEntity("/api/user", List.class);
         Assertions.assertThat(usersAfter.getBody()).isNotEmpty();
     }
+
+    @Test
+    public void testUpdate() {
+        ResponseEntity<User> user = template.postForEntity("/api/user", this.user, User.class);
+        User newUser = user.getBody();
+        newUser.setUsername("thiagomoura22");
+        template.put("/api/user", newUser);
+        ResponseEntity<User> userFinded = template.getForEntity("/api/user/email/{email}", User.class, this.user.getEmail());
+        Assertions.assertThat(userFinded.getBody().getUsername()).isEqualTo(newUser.getUsername());
+    }
 }
